@@ -1,0 +1,28 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "slug": "digital-branding-in-2026",
+      "title": "Digital Branding in 2026",
+      "excerpt": "How high-contrast design systems and clear CTA hierarchy improve conversion and retention.",
+      "image": "/assets/images/theme/assets/images/no-post.jpg",
+      "date": "2026-04-10"
+    },
+    {
+      "id": 2,
+      "slug": "react-nextjs-growth-stack",
+      "title": "React + Next.js Growth Stack",
+      "excerpt": "A practical guide to building scalable marketing websites without losing visual quality.",
+      "image": "/assets/images/theme/assets/images/no-post.jpg",
+      "date": "2026-04-08"
+    },
+    {
+      "id": 3,
+      "slug": "seo-ready-frontend-patterns",
+      "title": "SEO-Ready Frontend Patterns",
+      "excerpt": "Metadata, semantic layout, and fast loading patterns for modern frontend teams.",
+      "image": "/assets/images/theme/assets/images/no-post.jpg",
+      "date": "2026-04-05"
+    }
+  ]
+}

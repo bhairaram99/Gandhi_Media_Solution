@@ -1,0 +1,116 @@
+{
+  "name": "GaaGa",
+  "tagline": "We Offer You A Digital Platform",
+  "url": "http://localhost:3000",
+  "email": "hello@gms-nextjs.local",
+  "phone": "+1 (000) 000-0000",
+  "address": "Creative Street, Digital City",
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "/",
+      "megaMenu": [
+        {
+          "heading": "Main Home",
+          "links": [
+            { "label": "Home 1", "href": "/" },
+            { "label": "Home 2", "href": "https://gaaga.wpenginepowered.com/home-2/" },
+            { "label": "Home 3", "href": "https://gaaga.wpenginepowered.com/home-3/" },
+            { "label": "Home 4", "href": "https://gaaga.wpenginepowered.com/home-4/" },
+            { "label": "Home 5", "href": "https://gaaga.wpenginepowered.com/home-5/" },
+            { "label": "Home 6", "href": "https://gaaga.wpenginepowered.com/home-6/" },
+            { "label": "Home 7", "href": "https://gaaga.wpenginepowered.com/home-7/" }
+          ]
+        },
+        {
+          "heading": "RTL Demo",
+          "links": [
+            { "label": "RTL Home 1", "href": "https://gaaga.wpenginepowered.com/rtl-demo/" },
+            { "label": "RTL Home 2", "href": "https://gaaga.wpenginepowered.com/rtl-demo/home-2/" },
+            { "label": "RTL Home 3", "href": "https://gaaga.wpenginepowered.com/rtl-demo/home-3/" },
+            { "label": "RTL Home 4", "href": "https://gaaga.wpenginepowered.com/rtl-demo/home-4/" },
+            { "label": "RTL Home 5", "href": "https://gaaga.wpenginepowered.com/rtl-demo/home-5/" },
+            { "label": "RTL Home 6", "href": "https://gaaga.wpenginepowered.com/rtl-demo/home-6/" },
+            { "label": "RTL Home 7", "href": "https://gaaga.wpenginepowered.com/rtl-demo/home-7/" }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pages",
+      "href": "https://gaaga.wpenginepowered.com/about-us/",
+      "children": [
+        { "label": "About Us", "href": "https://gaaga.wpenginepowered.com/about-us/" },
+        { "label": "Process", "href": "https://gaaga.wpenginepowered.com/process/" },
+        { "label": "FAQ", "href": "https://gaaga.wpenginepowered.com/faq/" },
+        { "label": "Pricing Plan", "href": "https://gaaga.wpenginepowered.com/pricing-plan/" },
+        { "label": "Our Team", "href": "https://gaaga.wpenginepowered.com/our-team/" },
+        { "label": "Career", "href": "https://gaaga.wpenginepowered.com/career/" },
+        { "label": "404 Page", "href": "https://gaaga.wpenginepowered.com/404page" }
+      ]
+    },
+    {
+      "label": "Projects",
+      "href": "https://gaaga.wpenginepowered.com/projects/",
+      "children": [
+        { "label": "Projects", "href": "https://gaaga.wpenginepowered.com/projects/" },
+        {
+          "label": "Project Type",
+          "href": "https://gaaga.wpenginepowered.com/projects/",
+          "children": [
+            { "label": "Type 1", "href": "https://gaaga.wpenginepowered.com/projects/type-1/" },
+            { "label": "Type 2", "href": "https://gaaga.wpenginepowered.com/projects/type-2/" },
+            { "label": "Type 3", "href": "https://gaaga.wpenginepowered.com/projects/type-3/" }
+          ]
+        },
+        { "label": "Project Details", "href": "https://gaaga.wpenginepowered.com/listings/business-app/" }
+      ]
+    },
+    {
+      "label": "Services",
+      "href": "/services",
+      "children": [
+        { "label": "Services", "href": "/services" },
+        {
+          "label": "Service Type",
+          "href": "https://gaaga.wpenginepowered.com/services/",
+          "children": [
+            { "label": "Style 1", "href": "https://gaaga.wpenginepowered.com/style-1/" },
+            { "label": "Style 2", "href": "https://gaaga.wpenginepowered.com/style-2/" }
+          ]
+        },
+        { "label": "Service Details", "href": "https://gaaga.wpenginepowered.com/services/branding/" }
+      ]
+    },
+    {
+      "label": "Blog",
+      "href": "/blog",
+      "children": [
+        { "label": "Blog", "href": "/blog" },
+        {
+          "label": "Blog Type",
+          "href": "https://gaaga.wpenginepowered.com/blog/",
+          "children": [
+            { "label": "Classic", "href": "https://gaaga.wpenginepowered.com/blog/classic/" },
+            { "label": "Simple List", "href": "https://gaaga.wpenginepowered.com/blog/simple-list/" },
+            { "label": "Date & Time List", "href": "https://gaaga.wpenginepowered.com/blog/date-and-time-list/" },
+            { "label": "Date & Time", "href": "https://gaaga.wpenginepowered.com/blog/date-and-time/" },
+            { "label": "Bordered", "href": "https://gaaga.wpenginepowered.com/blog/bordered/" },
+            { "label": "Overlap", "href": "https://gaaga.wpenginepowered.com/blog/overlap/" }
+          ]
+        },
+        {
+          "label": "Blog Details",
+          "href": "https://gaaga.wpenginepowered.com/efficient-digital-marketing-platforms/"
+        }
+      ]
+    },
+    { "label": "Contact Us", "href": "/contact" }
+  ],
+  "social": [
+    { "label": "Facebook", "href": "#" },
+    { "label": "Instagram", "href": "#" },
+    { "label": "Twitter", "href": "#" },
+    { "label": "Pinterest", "href": "#" }
+  ]
+}
