@@ -66,22 +66,28 @@ const PAGES_COLUMNS = [
   },
 ];
 
+const PAGES_LINKS = [
+  { label: "PROCESS", href: "/process" },
+  { label: "FAQ", href: "/faq" },
+  { label: "PRICING PLAN", href: "/pricing-plan" },
+  { label: "OUR TEAM", href: "/our-team" },
+  { label: "CAREER", href: "/career" },
+  { label: "404 PAGE", href: "/404-page" },
+];
+
 const PROJECTS_LINKS = [
-  { label: "Projects", href: "/projects" },
-  { label: "Project Type", href: "/projects" },
-  { label: "Project Details", href: "/projects" },
+  { label: "PROJECTS LISTING", href: "/projects" },
+  { label: "PROJECTS DETAIL", href: "/projects" },
 ];
 
 const SERVICES_LINKS = [
-  { label: "Services", href: "/services" },
-  { label: "Service Type", href: "/services" },
-  { label: "Service Details", href: "/services" },
+  { label: "SERVICES LISTING", href: "/services" },
+  { label: "SERVICE DETAIL", href: "/services" },
 ];
 
 const BLOG_LINKS = [
-  { label: "Blog", href: "/blog" },
-  { label: "Blog Type", href: "/blog" },
-  { label: "Blog Details", href: "/blog" },
+  { label: "BLOG LISTING", href: "/blog" },
+  { label: "BLOG DETAIL", href: "/blog" },
 ];
 
 /* ── Dropdown (simple list) ── */
@@ -99,27 +105,66 @@ function SimpleDropdown({ links }: { links: { label: string; href: string }[] })
   );
 }
 
-/* ── Mega Dropdown (4-column PAGES menu) ── */
-function MegaDropdown() {
+/* ── Desktop Mega Dropdown (under main nav) ── */
+function MegaDropdown({ columns }: { columns: typeof PAGES_COLUMNS }) {
   return (
     <div className="gaaga-nav-mega">
-      {PAGES_COLUMNS.map((col) => (
-        <div key={col.heading} className="gaaga-nav-mega-col">
-          <h5 className="gaaga-nav-mega-heading">
-            {col.heading}
-            <span className="gaaga-nav-mega-line" aria-hidden />
-          </h5>
-          <ul>
-            {col.links.map((l) => (
-              <li key={l.label}>
-                <Link href={l.href} className="gaaga-nav-mega-link">
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+      <div className="gaaga-nav-mega-grid">
+        {columns.map((col) => (
+          <div key={col.heading} className="gaaga-nav-mega-column">
+            <h5 className="gaaga-nav-mega-heading">
+              {col.heading}
+              <span className="gaaga-nav-mega-heading-dot" aria-hidden>●</span>
+              <span className="gaaga-nav-mega-heading-line" aria-hidden />
+            </h5>
+
+            <ul>
+              {col.links.map((l) => (
+                <li key={`${col.heading}-${l.label}`}>
+                  <Link href={l.href} className="gaaga-nav-mega-link">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Fullscreen right trigger panel (4-column menu) ── */
+function SideOverlayMenu({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="gaaga-side-menu-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label="Site menu overlay">
+      <div className="gaaga-side-menu-panel" onClick={(e) => e.stopPropagation()}>
+        <button type="button" className="gaaga-side-menu-close" onClick={onClose} aria-label="Close menu">
+          ✕
+        </button>
+
+        <div className="gaaga-side-menu-grid">
+          {PAGES_COLUMNS.map((col) => (
+            <div key={col.heading} className="gaaga-side-menu-column">
+              <h5 className="gaaga-side-menu-heading">
+                {col.heading}
+                <span className="gaaga-side-menu-heading-dot" aria-hidden>●</span>
+                <span className="gaaga-side-menu-heading-line" aria-hidden />
+              </h5>
+
+              <ul>
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    <Link href={l.href} className="gaaga-side-menu-link" onClick={onClose}>
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
@@ -128,16 +173,14 @@ function MegaDropdown() {
 function NavItem({
   label,
   href,
-  hasCaret,
-  mega,
   dropdown,
+  megaColumns,
   active,
 }: {
   label: string;
   href: string;
-  hasCaret?: boolean;
-  mega?: boolean;
   dropdown?: { label: string; href: string }[];
+  megaColumns?: typeof PAGES_COLUMNS;
   active?: boolean;
 }) {
   const [open, setOpen] = useState(false);
@@ -160,19 +203,38 @@ function NavItem({
     >
       <Link href={href} className={`gaaga-nav-link${active ? " is-active" : ""}`}>
         {label}
-        {hasCaret && <span className="gaaga-nav-caret" aria-hidden />}
       </Link>
 
-      {open && mega && <MegaDropdown />}
-      {open && dropdown && <SimpleDropdown links={dropdown} />}
+      {open && megaColumns && <MegaDropdown columns={megaColumns} />}
+      {open && dropdown && !megaColumns && <SimpleDropdown links={dropdown} />}
     </li>
   );
 }
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [sideMenuOpen, setSideMenuOpen] = useState(false);
   const scrolled = useScroll(24);
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (!sideMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSideMenuOpen(false);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onEscape);
+    };
+  }, [sideMenuOpen]);
 
   return (
     <>
@@ -186,13 +248,15 @@ export default function Header() {
           {/* Desktop Nav */}
           <nav className="gaaga-nav" aria-label="Main navigation">
             <ul className="gaaga-nav-list">
-              <NavItem label="HOME" href="/" active={pathname === "/"} />
-              <NavItem label="PAGES" href="#" hasCaret mega />
-              <NavItem label="PROJECTS" href="/projects" hasCaret dropdown={PROJECTS_LINKS} />
-              <NavItem label="SERVICES" href="/services" hasCaret dropdown={SERVICES_LINKS} />
-              <NavItem label="BLOG" href="/blog" hasCaret dropdown={BLOG_LINKS} />
+              <NavItem label="HOME" href="/" megaColumns={PAGES_COLUMNS} active={pathname === "/"} />
+              <NavItem label="PAGES" href="#" dropdown={PAGES_LINKS} />
+              <NavItem label="PROJECTS" href="/projects" dropdown={PROJECTS_LINKS} active={pathname.startsWith("/projects")} />
+              <NavItem label="SERVICES" href="/services" dropdown={SERVICES_LINKS} active={pathname.startsWith("/services")} />
+              <NavItem label="BLOG" href="/blog" dropdown={BLOG_LINKS} active={pathname.startsWith("/blog")} />
               <li className="gaaga-nav-item">
-                <Link href="/contact" className="gaaga-nav-link">CONTACT US</Link>
+                <Link href="/contact" className={`gaaga-nav-link${pathname.startsWith("/contact") ? " is-active" : ""}`}>
+                  CONTACT US
+                </Link>
               </li>
             </ul>
           </nav>
@@ -201,6 +265,18 @@ export default function Header() {
           <Link href="/contact" className="gaaga-header-cta">
             <span className="gaaga-header-cta-dot" aria-hidden>•</span> Lets start
           </Link>
+
+          {/* Desktop diagonal trigger */}
+          <button
+            type="button"
+            className="gaaga-side-menu-trigger"
+            onClick={() => setSideMenuOpen(true)}
+            aria-label="Open full menu"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
 
           {/* Mobile trigger */}
           <button
@@ -237,6 +313,8 @@ export default function Header() {
           </div>
         </div>
       )}
+
+      {sideMenuOpen && <SideOverlayMenu onClose={() => setSideMenuOpen(false)} />}
     </>
   );
 }

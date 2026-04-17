@@ -44,6 +44,28 @@ html,
 body {
   margin: 0;
   padding: 0;
+  background: #111319;
+  overflow-x: hidden;
+}
+
+html {
+  scrollbar-color: #2e3753 #0f1422;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background: #0f1422;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f1422;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2e3753;
+  border-radius: 999px;
+  border: 2px solid #0f1422;
 }
 
 .gms-body {
@@ -239,7 +261,7 @@ body {
 
 .gms-hero-social {
   position: absolute;
-  left: 2px;
+  left: 4px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -269,34 +291,35 @@ body {
 }
 
 .gms-hero-scroll {
-  margin-top: 8px;
+  margin-top: 18px;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 2px;
   writing-mode: vertical-lr;
   transform: scale(-1);
   text-transform: uppercase;
   letter-spacing: 4px;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 1;
   color: #ffffff;
 }
 
 .gms-hero-scroll-icon {
-  color: #dd4242;
+  color: #e8351a;
   display: inline-flex;
   align-items: center;
   flex-direction: column;
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .gms-hero-scroll-icon::before {
   content: "";
-  width: 2px;
+  width: 1px;
   height: 50px;
   background: #6d7286;
-  margin: 10px 0;
+  margin: 10px 0 14px;
   transform-origin: bottom;
   animation: gms-scroll-line 2500ms infinite;
 }
@@ -1379,7 +1402,8 @@ textarea:focus {
   }
 
   .gms-hero-social {
-    display: none;
+    left: 0;
+    top: 52%;
   }
 
   .gms-services-grid {
@@ -1454,6 +1478,10 @@ textarea:focus {
 
   .gms-hero-actions {
     gap: 16px;
+  }
+
+  .gms-hero-social {
+    display: none;
   }
 
   .gms-hero-actions .primary-link,
@@ -1925,7 +1953,7 @@ textarea:focus {
 .gaaga-logo {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: 6px;
   color: #fff;
   font-weight: 700;
   font-size: 34px;
@@ -1933,8 +1961,8 @@ textarea:focus {
 }
 
 .gaaga-logo-dot {
-  color: #dd4242;
-  font-size: 16px;
+  color: #e8351a;
+  font-size: 10px;
   line-height: 0;
 }
 
@@ -1952,11 +1980,14 @@ textarea:focus {
   position: fixed;
   inset: 0 0 auto;
   z-index: 90;
-  border-bottom: 1px solid rgba(47, 52, 64, 0.7);
-  background: #111319;
+  border-bottom: 1px solid rgba(47, 52, 64, 0.45);
+  background: transparent;
+  transition: background-color 0.22s ease, border-color 0.22s ease, backdrop-filter 0.22s ease;
 }
 
 .gaaga-header--scrolled {
+  background: rgba(9, 13, 23, 0.82);
+  border-color: rgba(70, 76, 92, 0.7);
   backdrop-filter: blur(20px);
 }
 
@@ -1966,7 +1997,7 @@ textarea:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
 }
 
 .gaaga-nav-list {
@@ -1985,14 +2016,15 @@ textarea:focus {
 .gaaga-nav-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
+  gap: 0;
+  padding: 8px 15px;
   margin: 15px 0;
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 2.8px;
+  letter-spacing: 2.3px;
   text-transform: uppercase;
+  white-space: nowrap;
   transition: color 0.2s ease;
 }
 
@@ -2001,12 +2033,8 @@ textarea:focus {
   color: #dd4242;
 }
 
-.gaaga-nav-caret {
-  width: 7px;
-  height: 7px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg) translateY(-2px);
+.gaaga-nav-item--open > .gaaga-nav-link {
+  color: #dd4242;
 }
 
 .gaaga-nav-dropdown {
@@ -2017,8 +2045,9 @@ textarea:focus {
   margin: 0;
   padding: 14px 0;
   list-style: none;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: #111319;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0f1422;
+  animation: gaaga-dropdown-fade 160ms ease both;
   z-index: 30;
 }
 
@@ -2026,9 +2055,10 @@ textarea:focus {
   display: block;
   color: #fff;
   font-size: 14px;
-  letter-spacing: 2px;
+  font-weight: 500;
+  letter-spacing: 2.1px;
   text-transform: uppercase;
-  padding: 8px 20px;
+  padding: 7px 20px;
 }
 
 .gaaga-nav-dropdown-link:hover {
@@ -2040,64 +2070,203 @@ textarea:focus {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: min(1200px, 92vw);
+  width: 100vw;
+  margin-top: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0f1422;
+  z-index: 32;
+  animation: gaaga-dropdown-fade 160ms ease both;
+}
+
+.gaaga-nav-mega-grid {
+  width: min(1720px, 100%);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(180px, 1fr));
-  gap: 20px;
-  padding: 24px 28px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: #111319;
-  z-index: 30;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gaaga-nav-mega-column {
+  padding: 26px 22px 30px;
+}
+
+.gaaga-nav-mega-column:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gaaga-nav-mega-column ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .gaaga-nav-mega-heading {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: #fff;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1.1;
 }
 
-.gaaga-nav-mega-line {
-  display: block;
-  width: 100%;
+.gaaga-nav-mega-heading-dot {
+  color: #dd4242;
+  font-size: 10px;
+  line-height: 0;
+}
+
+.gaaga-nav-mega-heading-line {
+  width: 44px;
   height: 1px;
-  margin-top: 10px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.gaaga-nav-mega-col ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  background: rgba(255, 255, 255, 0.45);
 }
 
 .gaaga-nav-mega-link {
   display: block;
-  color: #c7cbd9;
+  padding: 7px 0;
+  color: #fff;
   font-size: 14px;
-  padding: 6px 0;
+  font-weight: 500;
+  letter-spacing: 2.1px;
+  text-transform: uppercase;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .gaaga-nav-mega-link:hover {
   color: #dd4242;
+  transform: translateX(8px);
 }
 
 .gaaga-header-cta {
   min-height: 50px;
-  padding: 12px 30px;
+  padding: 10px 20px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   color: #fff;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .gaaga-header-cta-dot {
   color: #dd4242;
   font-size: 24px;
   line-height: 0;
+}
+
+.gaaga-side-menu-trigger {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.gaaga-side-menu-trigger span {
+  width: 24px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.95);
+  transform: rotate(-45deg);
+  transform-origin: center;
+}
+
+.gaaga-side-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  background: rgba(9, 13, 23, 0.95);
+  padding-top: 96px;
+  animation: gaaga-overlay-fade 200ms ease;
+}
+
+.gaaga-side-menu-panel {
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px 44px 40px;
+  position: relative;
+  overflow: auto;
+}
+
+.gaaga-side-menu-close {
+  position: absolute;
+  top: 18px;
+  right: 44px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gaaga-side-menu-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gaaga-side-menu-column {
+  padding: 26px 24px;
+}
+
+.gaaga-side-menu-column:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gaaga-side-menu-column ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gaaga-side-menu-heading {
+  margin: 0 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.gaaga-side-menu-heading-dot {
+  color: #dd4242;
+  font-size: 10px;
+  line-height: 0;
+}
+
+.gaaga-side-menu-heading-line {
+  width: 44px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.gaaga-side-menu-link {
+  display: block;
+  padding: 7px 0;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 2.1px;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.gaaga-side-menu-link:hover {
+  color: #dd4242;
+  transform: translateX(8px);
 }
 
 .gaaga-mobile-trigger {
@@ -2148,6 +2317,28 @@ textarea:focus {
   margin: 12px 0 0;
   padding: 0;
   list-style: none;
+}
+
+@keyframes gaaga-dropdown-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gaaga-overlay-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .gaaga-mobile-link {
@@ -2974,12 +3165,34 @@ textarea:focus {
 }
 
 .gaaga-footer-columns {
-  max-width: 1230px;
-  margin: 0 auto;
-  padding: 56px 20px;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 40px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 82px clamp(14px, 1.6vw, 22px) 78px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(44px, 8vw, 170px);
+}
+
+.gaaga-footer .gaaga-logo-dot {
+  font-size: 26px;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.gaaga-footer .gaaga-logo {
+  gap: 6px;
+}
+
+.gaaga-footer-col {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.gaaga-footer-col--brand {
+  flex: 1.25 1 0;
+  max-width: 620px;
 }
 
 .gaaga-footer-col-title {
@@ -2993,9 +3206,43 @@ textarea:focus {
 .gaaga-footer-contact,
 .gaaga-footer-links a,
 .gaaga-footer-contact a {
-  color: #9fa7bc;
+  color: #b5b5b5;
   font-size: 16px;
   line-height: 1.7;
+}
+
+.gaaga-footer-tagline {
+  margin: 22px 0 0;
+}
+
+.gaaga-footer-subscribe-rail {
+  margin-top: 42px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gaaga-footer-subscribe-line {
+  flex: 1;
+  height: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.gaaga-footer-subscribe-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-family: var(--font-prompt), sans-serif;
+  font-size: clamp(22px, 1.85vw, 30px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.gaaga-footer-subscribe-dot {
+  color: #dd4242;
+  font-size: 14px;
+  line-height: 0;
 }
 
 .gaaga-footer-contact {
@@ -3011,35 +3258,96 @@ textarea:focus {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  gap: 8px;
-}
-
-.gaaga-footer-links a {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
-.gaaga-footer-link-dot {
-  color: #dd4242;
-  font-size: 14px;
-  line-height: 0;
+.gaaga-footer-links a {
+  display: inline-block;
+  position: relative;
+  transition: color 0.24s ease, transform 0.24s ease;
 }
 
-.gaaga-footer-copyright {
+.gaaga-footer-links a::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #dd4242;
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.24s ease, left 0.24s ease;
+}
+
+.gaaga-footer-links a:hover {
+  color: #fff;
+  transform: translateX(8px);
+}
+
+.gaaga-footer-links a:hover::before {
+  opacity: 1;
+  left: -10px;
+}
+
+.gaaga-footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  text-align: center;
-  padding: 15px 20px;
+  padding: 17px clamp(14px, 1.6vw, 22px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
   color: #8790a8;
 }
 
-.gaaga-footer-copyright p {
-  margin: 0;
+.gaaga-footer-bottom-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(14px, 2.2vw, 38px);
+  flex-wrap: wrap;
 }
 
-.gaaga-footer-copyright a {
-  color: inherit;
+.gaaga-footer-bottom-nav a {
+  color: #8790a8;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.gaaga-footer-bottom-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.gaaga-footer-bottom-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #8790a8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.gaaga-footer-bottom-copy {
+  margin: 0;
+  text-align: right;
+  color: #8790a8;
+  font-size: 14px;
+}
+
+.gaaga-footer-bottom a:hover {
+  color: #fff;
+}
+
+.gaaga-footer-bottom-social a:hover {
+  border-color: rgba(255, 255, 255, 0.52);
 }
 
 @keyframes gaaga-instagram-marquee {
@@ -3052,18 +3360,70 @@ textarea:focus {
   }
 }
 
+@media (max-width: 1280px) {
+  .gaaga-side-menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gaaga-side-menu-column:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .gaaga-side-menu-column:nth-child(n + 3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .gaaga-side-menu-heading {
+    font-size: 30px;
+  }
+}
+
 @media (max-width: 767px) {
   .gaaga-header-inner {
     padding: 0 20px;
   }
 
+  .gaaga-logo-text {
+    font-size: 32px;
+  }
+
   .gaaga-nav,
-  .gaaga-header-cta {
+  .gaaga-header-cta,
+  .gaaga-side-menu-trigger {
     display: none;
   }
 
   .gaaga-mobile-trigger {
     display: inline-flex;
+  }
+
+  .gaaga-side-menu-overlay {
+    padding-top: 84px;
+  }
+
+  .gaaga-side-menu-panel {
+    padding: 20px;
+  }
+
+  .gaaga-side-menu-close {
+    right: 20px;
+  }
+
+  .gaaga-side-menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gaaga-side-menu-column {
+    border-right: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .gaaga-side-menu-column:first-child {
+    border-top: 0;
+  }
+
+  .gaaga-side-menu-heading {
+    font-size: 26px;
   }
 }
 
@@ -3095,6 +3455,34 @@ textarea:focus {
   .gaaga-blog-grid,
   .gaaga-footer-columns {
     grid-template-columns: 1fr;
+  }
+
+  .gaaga-footer-columns {
+    padding: 62px 30px 54px;
+    flex-direction: column;
+    gap: 34px;
+  }
+
+  .gaaga-footer-col,
+  .gaaga-footer-col--brand {
+    width: 100%;
+    max-width: none;
+  }
+
+  .gaaga-footer-subscribe-rail {
+    margin-top: 30px;
+  }
+
+  .gaaga-footer-bottom {
+    padding: 14px 30px 18px;
+    flex-wrap: wrap;
+    row-gap: 14px;
+    justify-content: center;
+  }
+
+  .gaaga-footer-bottom-copy {
+    width: 100%;
+    text-align: center;
   }
 
   .gaaga-energy-banner-inner {
@@ -3331,6 +3719,32 @@ textarea:focus {
 
   .gaaga-footer-instagram-overlay-title {
     font-size: 24px;
+  }
+
+  .gaaga-footer-columns {
+    padding: 48px 20px 44px;
+    gap: 28px;
+  }
+
+  .gaaga-footer-subscribe-rail {
+    margin-top: 24px;
+    gap: 14px;
+  }
+
+  .gaaga-footer-subscribe-link {
+    font-size: clamp(26px, 9vw, 34px);
+  }
+
+  .gaaga-footer-bottom {
+    padding: 14px 20px 18px;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .gaaga-footer-bottom-nav {
+    justify-content: center;
+    gap: 14px 20px;
   }
 }
 

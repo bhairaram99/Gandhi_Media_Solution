@@ -3,7 +3,7 @@
     "eyebrow": "Innovative Ideas",
     "titleMain": "We Offer You A",
     "titleAccent": "Digital Platform",
-    "description": "Vulputate enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Nisl purus in mollis nunc sed id sempe egestas quis ips.",
+    "description": "We help businesses grow online through branding, websites, digital marketing, and creative strategies that deliver real results.",
     "primaryCta": "Get Started",
     "secondaryCta": "View Video",
     "image": "/assets/images/template/hero-main.jpg",
@@ -18,15 +18,15 @@
     "features": [
       {
         "title": "Advanced Tools",
-        "description": "Scelerisque viverra mauris in aliquam sem fringilla ut."
+        "description": "Smart tools and proven strategies to grow your business faster online."
       },
       {
         "title": "Innovation",
-        "description": "Sit amet volutpat consequat mauris nunc congue nisi."
+        "description": "Creative thinking and modern solutions built for today’s digital market."
       },
       {
         "title": "Creative Ideas",
-        "description": "Sagittis aliquam malesuada bibendum arcu vitae elementum."
+        "description": "Unique branding and content ideas that make your business stand out."
       }
     ]
   },

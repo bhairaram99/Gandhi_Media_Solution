@@ -9,30 +9,30 @@ type ServiceCard = ServiceItem & {
 
 const DEFAULT_SERVICES: ServiceCard[] = [
   {
-    title: "SEO Optimization",
+    title: "Branding & Identity",
     description:
-      "Duis tristique sollicitudin nibh sit amet commodo nulla. Aliquet nec ullamcorper sit amet risus nullam eget felis eget.",
+      "Build a strong, memorable brand identity that connects with your audience and drives long-term growth.",
     image: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/home-1-service-4.jpg",
     href: "https://gaaga.wpenginepowered.com/services/online-advertising/",
   },
   {
-    title: "Mobile App Marketing",
+    title: "Website Design & Development",
     description:
-      "Tincidunt vitae semper quis lectus nulla metus aliquam eleifend mi in nulla ut faucibus pulvinar elementum integer.",
+      "Create modern, high-performing websites that are built to engage visitors and convert them into customers.",
     image: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/home-1-service-3.jpg",
     href: "https://gaaga.wpenginepowered.com/services/startup-marketing/",
   },
   {
-    title: "Mobile App Development",
+    title: "Digital Marketing",
     description:
-      "Arcu bibendum at varius vel pharetra vel. Nisl condimentum id venenatis a condimentum vitae sapien pellentesque.",
+      "Use smart digital marketing campaigns to increase visibility, generate leads, and grow your business online.",
     image: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/home-1-service-2.jpg",
     href: "https://gaaga.wpenginepowered.com/services/promotion-marketing/",
   },
   {
-    title: "Creative Web Designs",
+    title: "Creative Strategy",
     description:
-      "Pellentesque diam volutpat commodo sed egestas. Mattis ullamcorper velit sed ullamcorper morbi. Quis vel eros donec ac odio.",
+      "Develop creative strategies and content that help your brand stand out in today’s competitive market.",
     image: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/home-1-service-1.jpg",
     href: "https://gaaga.wpenginepowered.com/services/marketing-campaign/",
   },

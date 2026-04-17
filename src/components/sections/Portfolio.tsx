@@ -103,8 +103,7 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
                 Projects
               </h3>
               <p>
-                Dolor sit amet consectetur adipiscing elit ut aliquam purus sit. Euismod nisi porta lorem mollis aliquam ut porttitor. In hac
-                habitasse platea dictumst. Amet massa vitae tortor condimentum lacinia quis.
+                Explore our recent work in branding, social media, websites, and marketing campaigns for growing businesses.
               </p>
               <a href="#" aria-label="View all projects">
                 <span className="line" />
