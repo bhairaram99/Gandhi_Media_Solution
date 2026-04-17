@@ -2162,7 +2162,7 @@ textarea:focus {
 
 .gaaga-services-section {
   background: #111319;
-  padding-bottom: 110px;
+  padding-bottom: 0;
 }
 
 .gaaga-promo-container {
@@ -2277,95 +2277,177 @@ textarea:focus {
 }
 
 .gaaga-services-title {
+  position: relative;
+  z-index: 1;
   margin-bottom: 36px;
+  padding-top: 90px;
+  text-align: center;
+}
+
+.gaaga-services-eyebrow {
+  margin: 0 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #717171;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.gaaga-services-eyebrow-line {
+  width: 38px;
+  height: 1px;
+  background: rgba(113, 113, 113, 0.6);
+}
+
+.gaaga-services-eyebrow-dot {
+  color: #dd4242;
+  font-size: 13px;
+  line-height: 0;
+}
+
+.gaaga-services-main-title {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-prompt), sans-serif;
+  font-size: clamp(40px, 3.5vw, 50px);
+  font-weight: 600;
+  line-height: 1.08;
+}
+
+.gaaga-services-bg {
+  position: relative;
+  isolation: isolate;
+  background-color: #111319;
+  background-image: url("https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/service-detail-bg-1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.gaaga-services-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(16, 20, 32, 0.38), rgba(16, 20, 32, 0.88) 60%),
+    linear-gradient(180deg, rgba(17, 19, 25, 0.25) 0%, rgba(17, 19, 25, 0.88) 100%);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .gaaga-services-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid #2a3047;
-  border-bottom: 1px solid #2a3047;
 }
 
 .gaaga-service-col {
   position: relative;
-  min-height: 520px;
-  border-right: 1px solid #2a3047;
+  min-height: 610px;
+  padding: 56px 44px 30px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: transparent;
 }
 
 .gaaga-service-col:last-child {
   border-right: 0;
 }
 
-.gaaga-service-bg-img {
+.gaaga-service-col::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transform: scale(1.04);
-  transition: opacity 0.35s ease, transform 0.5s ease;
-}
-
-.gaaga-service-col--hover .gaaga-service-bg-img {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.gaaga-service-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(8, 10, 17, 0.2) 0%, rgba(8, 10, 17, 0.9) 85%);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 52%;
+  background: linear-gradient(180deg, rgba(17, 19, 25, 0) 0%, rgba(17, 19, 25, 0.9) 100%);
   opacity: 0;
   transition: opacity 0.35s ease;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.gaaga-service-col--hover .gaaga-service-overlay {
-  opacity: 1;
+.gaaga-service-hover-image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .gaaga-service-content {
-  position: absolute;
-  inset: auto 22px 22px;
+  position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
 }
 
 .gaaga-service-title {
   margin: 0 0 10px;
   color: #fff;
-  font-size: 30px;
-  font-weight: 600;
-  line-height: 1.15;
+  font-size: clamp(30px, 2.1vw, 36px);
+  font-weight: 700;
+  line-height: 1.16;
+  transition: color 0.3s ease;
 }
 
 .gaaga-service-desc {
   margin: 0;
   color: #b5b5b5;
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.64;
+  transition: color 0.3s ease, font-weight 0.3s ease;
 }
 
-.gaaga-service-thumbnail {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  width: 74px;
-  height: 74px;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  z-index: 3;
+.gaaga-service-col:hover .gaaga-service-hover-image,
+.gaaga-service-col:focus-within .gaaga-service-hover-image {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gaaga-service-col:hover::after,
+.gaaga-service-col:focus-within::after {
+  opacity: 1;
+}
+
+.gaaga-service-col:hover .gaaga-service-title,
+.gaaga-service-col:focus-within .gaaga-service-title,
+.gaaga-service-col:hover .gaaga-service-desc,
+.gaaga-service-col:focus-within .gaaga-service-desc {
+  color: #e8351a;
+}
+
+.gaaga-service-col:hover .gaaga-service-desc,
+.gaaga-service-col:focus-within .gaaga-service-desc {
+  font-weight: 600;
 }
 
 .gaaga-know-more {
-  margin-top: 16px;
+  margin-top: auto;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   color: #fff;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
 }
 
 .gaaga-know-more-line {
@@ -2376,46 +2458,122 @@ textarea:focus {
 
 .gaaga-know-more-dot {
   color: #dd4242;
-  font-size: 24px;
+  font-size: 26px;
   line-height: 0;
 }
 
-.gaaga-faq-section {
-  padding: 110px 0;
+/* Logos strip marquee */
+
+.gaaga-logo-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
   background: #111319;
+  padding: 30px 0;
+}
+
+.gaaga-logo-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: gaaga-marquee 22s linear infinite;
+  will-change: transform;
+}
+
+.gaaga-logo-marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 52px;
+  padding: 0 26px;
+}
+
+.gaaga-logo-marquee-image {
+  width: auto;
+  height: 58px;
+  object-fit: contain;
+  opacity: 0.5;
+  filter: grayscale(100%);
+  flex-shrink: 0;
+}
+
+@keyframes gaaga-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.gaaga-faq-section {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  background: #111319;
+  overflow: visible;
 }
 
 .gaaga-faq-layout {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 70px;
-  align-items: start;
+  grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+  gap: 0;
+  align-items: stretch;
+}
+
+@keyframes gaaga-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gaaga-faq-left {
+  padding: 80px 64px 70px 80px;
+  border: 1px solid rgba(221, 66, 66, 0.65);
+  border-right: 1px solid rgba(221, 66, 66, 0.65);
 }
 
 .gaaga-faq-eyebrow {
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #959db5;
+  color: #717171;
+  font-size: 26px;
 }
 
 .gaaga-eyebrow-line {
-  width: 45px;
+  width: 38px;
   height: 1px;
-  background: rgba(149, 157, 181, 0.45);
+  background: rgba(113, 113, 113, 0.6);
 }
 
 .gaaga-eyebrow-dot {
   color: #dd4242;
 }
 
+.gaaga-faq-heading {
+  margin: 0 0 24px;
+  color: #fff;
+  font-family: var(--font-prompt), sans-serif;
+  font-size: clamp(40px, 3.5vw, 50px);
+  font-weight: 600;
+  line-height: 1.08;
+}
+
+.gaaga-faq-items {
+  width: min(100%, 760px);
+}
+
 .gaaga-faq-item {
-  border-top: 1px solid #222a44;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .gaaga-faq-item:last-child {
-  border-bottom: 1px solid #222a44;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .gaaga-faq-trigger {
@@ -2423,74 +2581,58 @@ textarea:focus {
   border: 0;
   background: transparent;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   padding: 22px 0;
   text-align: left;
   color: #fff;
+  cursor: pointer;
 }
 
 .gaaga-faq-play {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  color: #dd4242;
+  font-size: 26px;
+  line-height: 1;
+  transform: translateY(2px);
 }
 
 .gaaga-faq-question {
-  font-size: 20px;
+  font-size: clamp(34px, 2.4vw, 44px);
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.22;
 }
 
 .gaaga-faq-answer {
-  margin: 0 0 20px 36px;
-  color: #a8afc4;
-  line-height: 1.72;
+  margin: 0 0 26px 38px;
+  color: #b5b5b5;
+  font-size: 16px;
+  line-height: 1.66;
+}
+
+.gaaga-faq-body {
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+
+.gaaga-faq-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .gaaga-faq-right {
   position: relative;
+  min-height: 100%;
 }
 
 .gaaga-faq-img {
   width: 100%;
+  height: 100%;
+  min-height: 760px;
   display: block;
   object-fit: cover;
-}
-
-.gaaga-faq-trustpilot {
-  position: absolute;
-  left: 22px;
-  bottom: 22px;
-}
-
-.gaaga-faq-trustpilot-inner {
-  background: rgba(10, 13, 22, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 14px 16px;
-  color: #fff;
-  display: grid;
-  gap: 8px;
-}
-
-.gaaga-faq-trustpilot-dot {
-  color: #dd4242;
-}
-
-.gaaga-faq-trustpilot-brand {
-  font-weight: 700;
-}
-
-.gaaga-faq-trustpilot-stars {
-  display: inline-flex;
-  gap: 6px;
-}
-
-.gaaga-faq-trustpilot-count {
-  color: #b8bfd2;
-  font-size: 13px;
 }
 
 .gaaga-testimonials-section {
@@ -2751,11 +2893,41 @@ textarea:focus {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .gaaga-service-col {
+    min-height: 540px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .gaaga-service-col:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .gaaga-service-col:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .gaaga-logo-marquee-image {
+    height: 50px;
+  }
+
   .gaaga-faq-layout,
   .gaaga-testimonials-grid,
   .gaaga-blog-grid,
   .gaaga-footer-columns {
     grid-template-columns: 1fr;
+  }
+
+  .gaaga-faq-left {
+    padding: 70px 36px 60px;
+    border-right: 1px solid rgba(221, 66, 66, 0.65);
+  }
+
+  .gaaga-faq-right {
+    min-height: 540px;
+  }
+
+  .gaaga-faq-img {
+    min-height: 540px;
   }
 
   .gaaga-footer-gallery {
@@ -2765,10 +2937,30 @@ textarea:focus {
 
 @media (max-width: 767px) {
   .gaaga-services-section,
-  .gaaga-faq-section,
   .gaaga-testimonials-section,
   .gaaga-blog-section {
     padding-top: 90px;
+  }
+
+  .gaaga-services-title {
+    padding-top: 60px;
+  }
+
+  .gaaga-services-main-title {
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .gaaga-logo-marquee {
+    padding: 22px 0;
+  }
+
+  .gaaga-logo-marquee-group {
+    gap: 34px;
+    padding: 0 18px;
+  }
+
+  .gaaga-logo-marquee-image {
+    height: 42px;
   }
 
   .gaaga-promo-title {
@@ -2811,13 +3003,43 @@ textarea:focus {
   }
 
   .gaaga-service-col {
-    min-height: 420px;
+    min-height: 460px;
+    padding: 42px 24px 24px;
     border-right: 0;
-    border-bottom: 1px solid #2a3047;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .gaaga-service-col:last-child {
     border-bottom: 0;
+  }
+
+  .gaaga-service-title {
+    font-size: clamp(28px, 8vw, 34px);
+  }
+
+  .gaaga-faq-section {
+    padding-top: 0;
+  }
+
+  .gaaga-faq-left {
+    padding: 58px 20px 42px;
+  }
+
+  .gaaga-faq-heading {
+    font-size: clamp(34px, 9vw, 40px);
+  }
+
+  .gaaga-faq-question {
+    font-size: clamp(24px, 6.4vw, 30px);
+    line-height: 1.28;
+  }
+
+  .gaaga-faq-answer {
+    margin-left: 30px;
+  }
+
+  .gaaga-faq-img {
+    min-height: 420px;
   }
 }
 

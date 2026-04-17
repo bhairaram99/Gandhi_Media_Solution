@@ -1,6 +1,5 @@
 "use client";
 
-import Container from "@/components/ui/Container";
 import { useState } from "react";
 
 const FAQ_ITEMS = [
@@ -26,20 +25,24 @@ const FAQ_ITEMS = [
   },
 ];
 
-const FAQ_IMAGE = "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&h=700&fit=crop";
+const FAQ_IMAGE = "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/Gaaga-Home-1-Faq-Bg-Img-Ps.png";
+const FAQ_ROTATE_WIDGET_IMAGE =
+  "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/Gaaga-Faq-Rotate-Widget-Large-Img.png";
 
-const TRUSTPILOT_STARS = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&h=700&fit=crop";
-
-function ArrowIcon({ open }: { open: boolean }) {
+function RotatingConnectWidget() {
   return (
-    <span
-      className={`gaaga-faq-arrow${open ? " gaaga-faq-arrow--open" : ""}`}
+    <div
+      className="pointer-events-none absolute left-[54.5%] top-0 z-[5] grid h-[170px] w-[170px] -translate-x-1/2 -translate-y-1/2 place-items-center max-[1024px]:left-1/2 max-[1024px]:h-[150px] max-[1024px]:w-[150px] max-[767px]:h-[126px] max-[767px]:w-[126px]"
       aria-hidden
     >
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-        <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    </span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={FAQ_ROTATE_WIDGET_IMAGE}
+        alt=""
+        className="h-[148px] w-[148px] animate-[gaaga-rotate_12s_linear_infinite] object-contain select-none max-[1024px]:h-[122px] max-[1024px]:w-[122px] max-[767px]:h-[102px] max-[767px]:w-[102px]"
+      />
+      <span className="absolute text-[44px] leading-none text-[#dd4242] max-[767px]:text-[32px]">✳</span>
+    </div>
   );
 }
 
@@ -47,83 +50,66 @@ export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="gaaga-faq-section">
-      <Container>
-        <div className="gaaga-faq-layout">
-          {/* Left: Accordion */}
-          <div className="gaaga-faq-left">
-            <p className="gaaga-faq-eyebrow">
-              <span className="gaaga-eyebrow-line" aria-hidden />
-              <span className="gaaga-eyebrow-dot" aria-hidden>•</span>
-              FAQ's
-            </p>
-            <div className="gaaga-faq-items">
-              {FAQ_ITEMS.map((item, index) => {
-                const isOpen = openIndex === index;
-                return (
-                  <div
-                    key={index}
-                    className={`gaaga-faq-item${isOpen ? " gaaga-faq-item--open" : ""}`}
-                  >
-                    <button
-                      className="gaaga-faq-trigger"
-                      onClick={() => setOpenIndex(isOpen ? null : index)}
-                      aria-expanded={isOpen}
-                      id={`faq-q-${index}`}
-                    >
-                      <span className="gaaga-faq-arrow-wrap" aria-hidden>
-                        <svg width="0" height="0" viewBox="0 0 0 0" fill="none" style={{ display: "none" }} />
-                        {/* Red play/arrow icon */}
-                        <span className={`gaaga-faq-play${isOpen ? " gaaga-faq-play--open" : ""}`}>
-                          <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
-                            <path d="M0 0L10 6L0 12V0Z" fill="#dd4242"/>
-                          </svg>
-                        </span>
-                      </span>
-                      <span className="gaaga-faq-question">{item.question}</span>
-                    </button>
-                    <div
-                      className="gaaga-faq-body"
-                      style={{ maxHeight: isOpen ? "400px" : "0", overflow: "hidden", transition: "max-height 0.4s ease" }}
-                      role="region"
-                      aria-labelledby={`faq-q-${index}`}
-                    >
-                      <p className="gaaga-faq-answer">{item.answer}</p>
-                    </div>
-                    <div className="gaaga-faq-divider" aria-hidden />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+    <section className="gaaga-faq-section relative w-full overflow-visible bg-[#111319]">
+      <RotatingConnectWidget />
 
-          {/* Right: Image with Trustpilot overlay */}
-          <div className="gaaga-faq-right">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={FAQ_IMAGE}
-              alt="Team working"
-              className="gaaga-faq-img"
-              loading="lazy"
-            />
-            {/* Trustpilot badge overlay */}
-            <div className="gaaga-faq-trustpilot">
-              <div className="gaaga-faq-trustpilot-inner">
-                <span className="gaaga-faq-trustpilot-dot" aria-hidden>•</span>
-                <span className="gaaga-faq-trustpilot-brand">Trustpilot</span>
-                <div className="gaaga-faq-trustpilot-stars" aria-label="4.8 out of 5">
-                  {[0,1,2,3,4].map(i => (
-                    <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#dd4242">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                  ))}
+      <div className="gaaga-faq-layout grid grid-cols-[minmax(0,55fr)_minmax(0,45fr)] items-stretch gap-0 max-[1024px]:grid-cols-1">
+        {/* Left: Accordion */}
+        <div className="gaaga-faq-left lg:relative lg:z-[3] lg:-mr-[58px]">
+          <p className="gaaga-faq-eyebrow">
+            <span className="gaaga-eyebrow-line" aria-hidden />
+            <span className="gaaga-eyebrow-dot" aria-hidden>•</span>
+            FAQ&apos;s
+          </p>
+          <h2 className="gaaga-faq-heading">Our Expert Answers</h2>
+
+          <div className="gaaga-faq-items">
+            {FAQ_ITEMS.map((item, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <div
+                  key={index}
+                  className={`gaaga-faq-item${isOpen ? " gaaga-faq-item--open" : ""}`}
+                >
+                  <button
+                    className="gaaga-faq-trigger"
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                    id={`faq-q-${index}`}
+                  >
+                    <span className="gaaga-faq-play" aria-hidden>
+                      ▶
+                    </span>
+                    <span className="gaaga-faq-question">{item.question}</span>
+                  </button>
+
+                  <div
+                    className="gaaga-faq-body"
+                    style={{ maxHeight: isOpen ? "340px" : "0" }}
+                    role="region"
+                    aria-labelledby={`faq-q-${index}`}
+                  >
+                    <p className="gaaga-faq-answer">{item.answer}</p>
+                  </div>
+
+                  <div className="gaaga-faq-divider" aria-hidden />
                 </div>
-                <span className="gaaga-faq-trustpilot-count">over 4.8k ratings</span>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
-      </Container>
+
+        {/* Right: Full-height image */}
+        <div className="gaaga-faq-right lg:relative lg:z-[1]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={FAQ_IMAGE}
+            alt="Professionals in office"
+            className="gaaga-faq-img"
+            loading="lazy"
+          />
+        </div>
+      </div>
     </section>
   );
 }

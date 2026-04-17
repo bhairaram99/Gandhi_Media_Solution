@@ -1,38 +1,35 @@
 "use client";
 
 import Container from "@/components/ui/Container";
-import SectionTitle from "@/components/ui/SectionTitle";
-import { useState } from "react";
 
-// Each service has a background image that appears on hover
 const SERVICES = [
   {
     title: "SEO Optimization",
     description:
       "Duis tristique sollicitudin nibh sit amet commodo nulla. Aliquet nec ullamcorper sit amet risus nullam eget felis eget.",
-    image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&h=700&fit=crop",
-    href: "/services",
+    image: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/home-1-service-4.jpg",
+    href: "https://gaaga.wpenginepowered.com/services/online-advertising/",
   },
   {
     title: "Mobile App Marketing",
     description:
       "Tincidunt vitae semper quis lectus nulla metus aliquam eleifend mi in nulla ut faucibus pulvinar elementum integer.",
-    image: "https://images.unsplash.com/photo-1595348020949-87cdfbb44174?w=600&h=700&fit=crop",
-    href: "/services",
+    image: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/home-1-service-3.jpg",
+    href: "https://gaaga.wpenginepowered.com/services/startup-marketing/",
   },
   {
     title: "Mobile App Development",
     description:
       "Arcu bibendum at varius vel pharetra vel. Nisl condimentum id venenatis a condimentum vitae sapien pellentesque.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=700&fit=crop",
-    href: "/services",
+    image: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/home-1-service-2.jpg",
+    href: "https://gaaga.wpenginepowered.com/services/promotion-marketing/",
   },
   {
     title: "Creative Web Designs",
     description:
       "Pellentesque diam volutpat commodo sed egestas. Mattis ullamcorper velit sed ullamcorper morbi. Quis vel eros donec ac odio.",
-    image: "https://images.unsplash.com/photo-1536329583941-14287ec6fc4e?w=600&h=700&fit=crop",
-    href: "/services",
+    image: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/home-1-service-1.jpg",
+    href: "https://gaaga.wpenginepowered.com/services/marketing-campaign/",
   },
 ];
 
@@ -47,8 +44,6 @@ function KnowMoreLink({ href }: { href: string }) {
 }
 
 export default function Services() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   return (
     <section className="gaaga-services-section" id="services">
       {/* Promotion Title Section */}
@@ -58,14 +53,16 @@ export default function Services() {
             <span className="gaaga-promo-line">It&apos;s Time To Take Your Digital Marketing</span>
 
             <span className="gaaga-promo-line">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/content-image-small-size-4.png"
                 alt=""
                 className="gaaga-promo-img gaaga-promo-img--rect"
               />
               To The Next Level
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/group-image.png"
+                src="https://aimax.wpengine.com/wp-content/uploads/2023/06/group-image.png"
                 alt=""
                 className="gaaga-promo-img is-circle"
               />
@@ -113,53 +110,40 @@ export default function Services() {
 
       {/* Services Section */}
       <div className="gaaga-services-bg">
+        <div className="gaaga-services-bg-overlay" aria-hidden />
         <Container>
-          <SectionTitle
-            eyebrow="Services"
-            title="What We Have to Offer"
-            centered
-            className="gaaga-services-title"
-          />
+          <div className="gaaga-services-title">
+            <p className="gaaga-services-eyebrow">
+              <span className="gaaga-services-eyebrow-line" aria-hidden />
+              <span className="gaaga-services-eyebrow-dot" aria-hidden>•</span>
+              Services
+              <span className="gaaga-services-eyebrow-dot" aria-hidden>•</span>
+              <span className="gaaga-services-eyebrow-line" aria-hidden />
+            </p>
+            <h2 className="gaaga-services-main-title">What We Have to Offer</h2>
+          </div>
         </Container>
 
-        {/* 4-column services with hover images - full width */}
+        {/* 4-column services with hover image reveal */}
         <div className="gaaga-services-grid">
-          {SERVICES.map((service, index) => (
+          {SERVICES.map((service) => (
             <div
               key={service.title}
-              className={`gaaga-service-col${hoveredIndex === index ? " gaaga-service-col--hover" : ""}`}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              className="gaaga-service-col"
             >
-              {/* Background image (reveals on hover) */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={service.image}
                 alt={service.title}
-                className="gaaga-service-bg-img"
+                className="gaaga-service-hover-image"
                 loading="lazy"
               />
 
-              {/* Dark overlay */}
-              <div className="gaaga-service-overlay" aria-hidden />
-
-              {/* Content */}
               <div className="gaaga-service-content">
                 <h3 className="gaaga-service-title">{service.title}</h3>
                 <p className="gaaga-service-desc">{service.description}</p>
                 <KnowMoreLink href={service.href} />
               </div>
-
-              {/* Thumbnail shown on hover (bottom-left) */}
-              {hoveredIndex === index && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={service.image}
-                  alt=""
-                  className="gaaga-service-thumbnail"
-                  aria-hidden
-                />
-              )}
             </div>
           ))}
         </div>
