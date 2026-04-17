@@ -62,20 +62,20 @@ function PortfolioCard({ item, wide = false }: { item: TemplatePortfolioItem; wi
     <article className={`gms-portfolio-listing-card${wide ? " gms-portfolio-listing-card--wide" : ""}`}>
       <div className="gms-portfolio-listing-image">
         <img src={item.image} alt={item.title} className="gms-portfolio-thumb" loading="lazy" />
-      </div>
-
-      <div className="gms-portfolio-listing-content">
-        <p className="gms-portfolio-listing-category">{item.category}</p>
-        <h3>
-          <a href={item.href} aria-label={item.title}>
-            {item.title}
+        <div className="gms-portfolio-listing-content">
+          <p className="gms-portfolio-listing-category">{item.category}</p>
+          <h3>
+            <a href={item.href} aria-label={item.title}>
+              {item.title}
+            </a>
+          </h3>
+          <p className="gms-portfolio-listing-excerpt">{item.excerpt}</p>
+          <a className="gms-portfolio-listing-read-more" href={item.href} aria-label={`Read more about ${item.title}`}>
+            <span className="line" />
+            <span className="dot" />
+            Read More
           </a>
-        </h3>
-        <p className="gms-portfolio-listing-excerpt">{item.excerpt}</p>
-        <a className="gms-portfolio-listing-read-more" href={item.href} aria-label={`Read more about ${item.title}`}>
-          <span className="dot" />
-          Read More
-        </a>
+        </div>
       </div>
     </article>
   );

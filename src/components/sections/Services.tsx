@@ -51,6 +51,47 @@ export default function Services() {
 
   return (
     <section className="gaaga-services-section" id="services">
+      {/* Promotion Title Section */}
+      <div className="gaaga-promo-container">
+        <Container>
+          <h2 className="gaaga-promo-title">
+            <span className="gaaga-promo-line">It&apos;s Time To Take Your Digital Marketing</span>
+
+            <span className="gaaga-promo-line">
+              <img
+                src="https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/content-image-small-size-4.png"
+                alt=""
+                className="gaaga-promo-img gaaga-promo-img--rect"
+              />
+              To The Next Level
+              <img
+                src="https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/group-image.png"
+                alt=""
+                className="gaaga-promo-img is-circle"
+              />
+              We Are
+            </span>
+
+            <span className="gaaga-promo-line">Always Here To Help You Grow Your</span>
+
+            <span className="gaaga-promo-line">
+              Business
+              <a href="#" className="gaaga-promo-video-btn" aria-label="Play video">
+                <svg
+                  width="16"
+                  height="18"
+                  viewBox="0 0 16 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16 9L0 18V0L16 9Z" fill="currentColor" />
+                </svg>
+              </a>
+            </span>
+          </h2>
+        </Container>
+      </div>
+
       {/* Stats Counter Row */}
       <div className="gaaga-stats-row">
         <Container>
@@ -63,7 +104,7 @@ export default function Services() {
             ].map((stat) => (
               <div key={stat.label} className="gaaga-stat-item">
                 <span className="gaaga-stat-number">{stat.number}</span>
-                <span className="gaaga-stat-label">{stat.label.replace("\\n", "\n")}</span>
+                <span className="gaaga-stat-label">{stat.label}</span>
               </div>
             ))}
           </div>

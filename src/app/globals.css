@@ -232,6 +232,9 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transform-origin: center center;
+  animation: gms-hero-zoom 12s ease-in-out infinite;
+  will-change: transform;
 }
 
 .gms-hero-social {
@@ -497,25 +500,43 @@ img {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.gms-portfolio-listing-card,
+.gms-portfolio-listing-card {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
 .gms-portfolio-all-projects {
-  border: 1px solid #1f2d4f;
+  border: 0;
   background: #111319;
 }
 
-.gms-portfolio-listing-card {
-  padding: 22px;
+.gms-portfolio-listing-image {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-.gms-portfolio-listing-image {
-  margin-bottom: 24px;
-  overflow: hidden;
+.gms-portfolio-listing-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 9, 15, 0.08) 8%, rgba(6, 9, 15, 0.88) 88%);
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .gms-portfolio-thumb {
   width: 100%;
   display: block;
   object-fit: cover;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .gms-portfolio-listing-card .gms-portfolio-thumb {
@@ -526,41 +547,83 @@ img {
   aspect-ratio: 898 / 450;
 }
 
+.gms-portfolio-listing-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 24px 24px 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(28px);
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.45s;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.gms-portfolio-listing-content > * {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gms-portfolio-listing-card--wide .gms-portfolio-listing-content {
+  max-width: 74%;
+}
+
 .gms-portfolio-listing-category {
-  margin: 0 0 10px;
-  color: #9ca4ba;
-  font-size: 17px;
-  line-height: 1.45;
+  display: none;
 }
 
 .gms-portfolio-listing-content h3 {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
 }
 
 .gms-portfolio-listing-content h3 a {
   color: #fff;
-  font-size: clamp(30px, 2.4vw, 40px);
-  line-height: 1.16;
+  font-size: clamp(22px, 2.1vw, 46px);
+  line-height: 1.1;
   font-family: var(--font-prompt), sans-serif;
   font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.gms-portfolio-listing-content h3 a:hover {
+  color: #dd4242;
 }
 
 .gms-portfolio-listing-excerpt {
   margin: 0;
   color: #b5b5b5;
-  font-size: 16px;
-  line-height: 1.64;
+  font-size: 15px;
+  line-height: 1.52;
+  max-width: 520px;
+  line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 .gms-portfolio-listing-read-more {
-  margin-top: 18px;
+  margin-top: 14px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   color: #fff;
   font-size: 16px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.gms-portfolio-listing-read-more .line {
+  width: 44px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
+  transition: width 0.25s ease;
 }
 
 .gms-portfolio-listing-read-more .dot {
@@ -569,6 +632,55 @@ img {
   border-radius: 50%;
   background: #dd4242;
   display: inline-block;
+}
+
+.gms-portfolio-listing-read-more:hover {
+  color: #dd4242;
+}
+
+.gms-portfolio-listing-read-more:hover .line {
+  width: 34px;
+}
+
+.gms-portfolio-listing-content .gms-portfolio-listing-category {
+  transition-delay: 0.04s;
+}
+
+.gms-portfolio-listing-content h3 {
+  transition-delay: 0.1s;
+}
+
+.gms-portfolio-listing-content .gms-portfolio-listing-excerpt {
+  transition-delay: 0.14s;
+}
+
+.gms-portfolio-listing-content .gms-portfolio-listing-read-more {
+  transition-delay: 0.2s;
+}
+
+.gms-portfolio-listing-card:hover .gms-portfolio-listing-image::before,
+.gms-portfolio-listing-card:focus-within .gms-portfolio-listing-image::before {
+  opacity: 1;
+}
+
+.gms-portfolio-listing-card:hover .gms-portfolio-thumb,
+.gms-portfolio-listing-card:focus-within .gms-portfolio-thumb {
+  transform: scale(1.06);
+}
+
+.gms-portfolio-listing-card:hover .gms-portfolio-listing-content,
+.gms-portfolio-listing-card:focus-within .gms-portfolio-listing-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+  pointer-events: auto;
+}
+
+.gms-portfolio-listing-card:hover .gms-portfolio-listing-content > *,
+.gms-portfolio-listing-card:focus-within .gms-portfolio-listing-content > * {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .gms-portfolio-all-projects {
@@ -1180,6 +1292,20 @@ textarea:focus {
   }
 }
 
+@keyframes gms-hero-zoom {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 991px) {
   .gms-header-shell {
     padding: 0 20px;
@@ -1286,7 +1412,11 @@ textarea:focus {
   }
 
   .gms-portfolio-listing-content h3 a {
-    font-size: clamp(30px, 4.7vw, 36px);
+    font-size: clamp(30px, 4.7vw, 46px);
+  }
+
+  .gms-portfolio-listing-card--wide .gms-portfolio-listing-content {
+    max-width: 100%;
   }
 
   .gms-portfolio-all-projects h3 {
@@ -1373,16 +1503,12 @@ textarea:focus {
     grid-column: auto;
   }
 
-  .gms-portfolio-listing-card {
-    padding: 16px;
-  }
-
-  .gms-portfolio-listing-image {
-    margin-bottom: 16px;
+  .gms-portfolio-listing-content {
+    padding: 18px 16px 16px;
   }
 
   .gms-portfolio-listing-content h3 a {
-    font-size: clamp(28px, 10vw, 40px);
+    font-size: clamp(24px, 9.2vw, 34px);
   }
 
   .gms-portfolio-all-projects {
@@ -1793,440 +1919,385 @@ textarea:focus {
 }
 
 /* ==========================================================================
-   GAAGA LOGO (used in Header + Footer)
+   GaaGa components (layout restore)
    ========================================================================== */
+
 .gaaga-logo {
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  font-family: var(--font-prompt), sans-serif;
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 1;
   color: #fff;
-  letter-spacing: -0.5px;
-  text-decoration: none;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1;
 }
-.gaaga-logo-dot { color: #dd4242; font-size: 18px; line-height: 1; }
-.gaaga-logo-text { color: #fff; }
-.gaaga-logo-bold { color: #dd4242; }
 
-/* ==========================================================================
-   HEADER / NAVBAR — GaaGa exact match
-   ========================================================================== */
+.gaaga-logo-dot {
+  color: #dd4242;
+  font-size: 16px;
+  line-height: 0;
+}
+
+.gaaga-logo-text {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.gaaga-logo-bold {
+  color: #dd4242;
+}
+
 .gaaga-header {
   position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  background: #111319;
+  inset: 0 0 auto;
+  z-index: 90;
   border-bottom: 1px solid rgba(47, 52, 64, 0.7);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  background: #111319;
 }
+
 .gaaga-header--scrolled {
-  background: rgba(17, 19, 25, 0.96);
   backdrop-filter: blur(20px);
-  box-shadow: 0 2px 30px rgba(0,0,0,0.4);
 }
+
 .gaaga-header-inner {
+  min-height: 96px;
+  padding: 0 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  min-height: 88px;
-  gap: 20px;
-  max-width: 1600px;
-  margin: 0 auto;
+  gap: 12px;
 }
 
-/* Nav list */
-.gaaga-nav { display: flex; }
 .gaaga-nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: flex;
   align-items: center;
-  list-style: none;
-  margin: 0; padding: 0;
   gap: 0;
 }
-.gaaga-nav-item { position: relative; }
+
+.gaaga-nav-item {
+  position: relative;
+}
+
 .gaaga-nav-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 18px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  white-space: nowrap;
-  font-family: var(--font-prompt), sans-serif;
-}
-.gaaga-nav-link.is-active { color: #dd4242; }
-.gaaga-nav-link:hover { color: #dd4242; }
-
-/* Caret (down arrow) */
-.gaaga-nav-caret {
-  display: inline-block;
-  width: 0; height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid currentColor;
-  margin-top: 1px;
-}
-
-/* Dropdown */
-.gaaga-nav-dropdown {
-  position: absolute;
-  top: calc(100% + 0px);
-  left: 0;
-  min-width: 200px;
-  background: #111319;
-  border: 1px solid rgba(255,255,255,0.08);
-  list-style: none;
-  margin: 0; padding: 12px 0;
-  z-index: 200;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
-.gaaga-nav-dropdown-link {
-  display: block;
-  padding: 9px 22px;
-  color: #c0c4d4;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.gaaga-nav-dropdown-link:hover { color: #dd4242; }
-
-/* Mega Menu — 4 columns like real GaaGa PAGES dropdown */
-.gaaga-nav-mega {
-  position: absolute !important;
-  top: calc(100% + 0px) !important;
-  left: 0 !important;
-  width: 100vw !important;
-  max-width: 1100px !important;
-  background: #111319 !important;
-  border: 1px solid rgba(255,255,255,0.08) !important;
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 0 !important;
-  z-index: 200 !important;
-  padding: 32px !important;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important;
-}
-.gaaga-nav-mega-col { padding: 0 20px; }
-.gaaga-nav-mega-col + .gaaga-nav-mega-col { border-left: 1px solid rgba(255,255,255,0.06); }
-.gaaga-nav-mega-heading {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  gap: 8px;
+  padding: 8px 20px;
+  margin: 15px 0;
   color: #fff;
   font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  margin: 0 0 16px;
-  padding-bottom: 12px;
-}
-.gaaga-nav-mega-line {
-  flex: 1;
-  height: 1px;
-  background: rgba(255,255,255,0.12);
-  display: block;
-}
-.gaaga-nav-mega-heading .gaaga-logo-dot { margin-left: -8px; }
-.gaaga-nav-mega ul { list-style: none; margin: 0; padding: 0; }
-.gaaga-nav-mega li { margin-bottom: 2px; }
-.gaaga-nav-mega-link {
-  display: block;
-  padding: 6px 0;
-  color: #9ca2ba;
-  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 1.5px;
+  letter-spacing: 2.8px;
   text-transform: uppercase;
-  text-decoration: none;
   transition: color 0.2s ease;
 }
-.gaaga-nav-mega-link:hover { color: #dd4242; }
 
-/* Lets Start button */
+.gaaga-nav-link:hover,
+.gaaga-nav-link.is-active {
+  color: #dd4242;
+}
+
+.gaaga-nav-caret {
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+}
+
+.gaaga-nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 12px;
+  min-width: 250px;
+  margin: 0;
+  padding: 14px 0;
+  list-style: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #111319;
+  z-index: 30;
+}
+
+.gaaga-nav-dropdown-link {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+}
+
+.gaaga-nav-dropdown-link:hover {
+  color: #dd4242;
+}
+
+.gaaga-nav-mega {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1200px, 92vw);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 24px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #111319;
+  z-index: 30;
+}
+
+.gaaga-nav-mega-heading {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.gaaga-nav-mega-line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.gaaga-nav-mega-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gaaga-nav-mega-link {
+  display: block;
+  color: #c7cbd9;
+  font-size: 14px;
+  padding: 6px 0;
+}
+
+.gaaga-nav-mega-link:hover {
+  color: #dd4242;
+}
+
 .gaaga-header-cta {
+  min-height: 50px;
+  padding: 12px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 28px;
-  border: 1px solid rgba(255,255,255,0.25);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-decoration: none;
-  font-family: var(--font-prompt), sans-serif;
-  transition: border-color 0.2s ease, background 0.2s ease;
-  white-space: nowrap;
-  flex-shrink: 0;
+  gap: 6px;
 }
-.gaaga-header-cta:hover { border-color: #dd4242; background: rgba(221,66,66,0.05); }
-.gaaga-header-cta-dot { color: #dd4242; font-size: 18px; line-height: 0; }
 
-/* Mobile trigger */
+.gaaga-header-cta-dot {
+  color: #dd4242;
+  font-size: 24px;
+  line-height: 0;
+}
+
 .gaaga-mobile-trigger {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  color: #fff;
   display: none;
   flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-}
-.gaaga-mobile-trigger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: #fff;
-  transition: 0.3s;
+  justify-content: center;
+  gap: 6px;
 }
 
-/* Mobile overlay */
+.gaaga-mobile-trigger span {
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+  display: block;
+}
+
 .gaaga-mobile-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
-  z-index: 500;
-  display: flex;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 120;
 }
+
 .gaaga-mobile-drawer {
-  width: 300px;
+  width: min(340px, 100%);
+  height: 100%;
+  margin-left: auto;
   background: #111319;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 18px;
 }
+
 .gaaga-mobile-close {
-  align-self: flex-end;
-  background: none;
-  border: none;
+  border: 0;
+  background: transparent;
   color: #fff;
   font-size: 22px;
-  cursor: pointer;
-  margin-bottom: 24px;
+  margin-left: auto;
+  display: block;
 }
-.gaaga-mobile-nav { list-style: none; margin: 0; padding: 0; }
+
+.gaaga-mobile-nav {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
 .gaaga-mobile-link {
   display: block;
-  padding: 14px 0;
   color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   text-transform: uppercase;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  transition: color 0.2s;
-}
-.gaaga-mobile-link:hover { color: #dd4242; }
-
-@media (max-width: 1100px) {
-  .gaaga-nav { display: none; }
-  .gaaga-header-cta { display: none; }
-  .gaaga-mobile-trigger { display: flex; }
+  letter-spacing: 1.6px;
+  font-size: 14px;
 }
 
-/* ==========================================================================
-   FOOTER — GaaGa exact match
-   ========================================================================== */
-.gaaga-footer { background: #0f1118; }
-
-/* 4-column image gallery row */
-.gaaga-footer-gallery {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 0 !important;
+.gaaga-services-section {
+  background: #111319;
+  padding-bottom: 110px;
 }
-.gaaga-footer-gallery-item {
+
+.gaaga-promo-container {
+  padding: 90px 0 45px;
+}
+
+.gaaga-promo-title {
+  max-width: 1140px;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  font-size: clamp(34px, 3.65vw, 56px);
+  line-height: 1.16;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   position: relative;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-  max-height: 300px;
 }
-.gaaga-footer-gallery-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+
+.gaaga-promo-line {
   display: block;
-  transition: transform 0.5s ease;
-}
-.gaaga-footer-gallery-item:hover .gaaga-footer-gallery-img { transform: scale(1.06); }
-
-/* Instagram overlay (2nd item) */
-.gaaga-footer-insta-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255,255,255,0.2);
-  gap: 8px;
-}
-.gaaga-footer-insta-icon { color: #fff; }
-.gaaga-footer-insta-text { color: #fff; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
-.gaaga-footer-insta-handle { color: #fff; font-size: 16px; font-weight: 700; }
-
-/* Footer Columns */
-.gaaga-footer-columns {
-  display: grid !important;
-  grid-template-columns: 2fr 1fr 1fr !important;
-  gap: 60px !important;
-  padding: 60px 80px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-.gaaga-footer-tagline {
-  margin-top: 20px;
-  color: #7a8099;
-  font-size: 14px;
-  line-height: 1.9;
-  max-width: 400px;
-}
-.gaaga-footer-col-title {
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0 0 22px;
-  font-family: var(--font-prompt), sans-serif;
-}
-.gaaga-footer-contact {
-  color: #7a8099;
-  font-size: 14px;
-  line-height: 2;
-  font-style: normal;
-}
-.gaaga-footer-contact a { color: #7a8099; text-decoration: none; transition: color 0.2s; }
-.gaaga-footer-contact a:hover { color: #dd4242; }
-.gaaga-footer-links {
-  list-style: none;
-  margin: 0; padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.gaaga-footer-links a {
-  color: #7a8099;
-  font-size: 14px;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.gaaga-footer-links a:hover { color: #dd4242; }
-
-.gaaga-footer-copyright {
-  padding: 20px 80px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  color: #555b6e;
-  font-size: 13px;
 }
 
-@media (max-width: 900px) {
-  .gaaga-footer-gallery { grid-template-columns: repeat(2, 1fr); }
-  .gaaga-footer-columns { grid-template-columns: 1fr; padding: 40px 24px; gap: 32px; }
-  .gaaga-footer-copyright { padding: 16px 24px; }
-}
-
-/* ==========================================================================
-   GLOBAL UTILITY: Know More link / Eyebrow patterns
-   ========================================================================== */
-.gaaga-know-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.gaaga-know-more:hover { color: #dd4242; }
-.gaaga-know-more-line {
+.gaaga-promo-img {
   display: inline-block;
-  width: 40px;
-  height: 1px;
-  background: #6f7488;
-}
-.gaaga-know-more-dot { color: #dd4242; font-size: 14px; line-height: 1; }
-
-.gaaga-eyebrow-line {
-  display: inline-block;
-  width: 40px;
-  height: 1px;
-  background: #6f7488;
+  width: clamp(84px, 6vw, 108px);
+  margin: 0 10px;
   vertical-align: middle;
 }
-.gaaga-eyebrow-dot { color: #dd4242; font-size: 14px; line-height: 1; vertical-align: middle; margin: 0 4px; }
 
-/* ==========================================================================
-   STATS ROW (10 Years, 12+ Tools, 52 Clients, 90 Projects)
-   ========================================================================== */
+.gaaga-promo-img.gaaga-promo-img--rect {
+  border-radius: 999px;
+}
+
+.gaaga-promo-img.is-circle {
+  width: clamp(104px, 7.4vw, 132px);
+  margin-inline: 12px;
+  border-radius: 999px;
+}
+
+.gaaga-promo-video-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-left: 14px;
+  border-radius: 999px;
+  background: #dd4242;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  vertical-align: middle;
+  position: relative;
+}
+
+.gaaga-promo-video-btn::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.gaaga-promo-video-btn svg {
+  position: relative;
+  z-index: 1;
+  margin-left: 2px;
+}
+
 .gaaga-stats-row {
-  background: #0e1118;
-  padding: 50px 0 60px;
-}
-.gaaga-stats-grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 0 !important;
-}
-.gaaga-stat-item {
-  display: flex !important;
-  align-items: flex-start !important;
-  gap: 20px !important;
-  padding: 0 32px !important;
-}
-.gaaga-stat-item + .gaaga-stat-item { border-left: 1px solid rgba(255,255,255,0.05) !important; }
-.gaaga-stat-number {
-  font-size: clamp(60px, 7vw, 90px) !important;
-  font-weight: 300 !important;
-  line-height: 1 !important;
-  color: rgba(255,255,255,0.12) !important;
-  font-family: var(--font-prompt), sans-serif !important;
-  letter-spacing: -3px !important;
-}
-.gaaga-stat-label {
-  color: #9ca2ba;
-  font-size: 14px;
-  line-height: 1.5;
-  padding-top: 14px;
-  white-space: pre-line;
+  padding: 20px 0 74px;
 }
 
-/* ==========================================================================
-   SERVICES — full width columns with hover bg images
-   ========================================================================== */
-.gaaga-services-section { background: #111319; }
-.gaaga-services-bg { background: #111319; padding-bottom: 0; }
-.gaaga-services-title { padding: 80px 0 60px; }
+.gaaga-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.gaaga-stat-item {
+  padding: 0;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  text-align: left;
+}
+
+.gaaga-stat-number {
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: 1px #d2d8e8;
+  font-size: clamp(76px, 6vw, 104px);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+}
+
+.gaaga-stat-item:nth-child(3) .gaaga-stat-number {
+  color: #dd4242;
+  -webkit-text-stroke: 0;
+}
+
+.gaaga-stat-label {
+  display: block;
+  margin: 0;
+  color: #9ea5bb;
+  font-size: clamp(16px, 1.42vw, 24px);
+  font-weight: 400;
+  white-space: pre-line;
+  line-height: 1.3;
+}
+
+.gaaga-services-title {
+  margin-bottom: 36px;
+}
+
 .gaaga-services-grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  min-height: 600px !important;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid #2a3047;
+  border-bottom: 1px solid #2a3047;
 }
 
 .gaaga-service-col {
-  position: relative !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  border-right: 1px solid rgba(255,255,255,0.06) !important;
-  cursor: default !important;
-  display: flex !important;
-  flex-direction: column !important;
-  min-height: 500px !important;
+  position: relative;
+  min-height: 520px;
+  border-right: 1px solid #2a3047;
+  overflow: hidden;
 }
-.gaaga-service-col:last-child { border-right: none; }
 
-/* Background image (hidden by default, revealed on hover) */
+.gaaga-service-col:last-child {
+  border-right: 0;
+}
+
 .gaaga-service-bg-img {
   position: absolute;
   inset: 0;
@@ -2234,368 +2305,519 @@ textarea:focus {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1.08);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 0;
+  transform: scale(1.04);
+  transition: opacity 0.35s ease, transform 0.5s ease;
 }
+
 .gaaga-service-col--hover .gaaga-service-bg-img {
   opacity: 1;
   transform: scale(1);
 }
 
-/* Dark overlay on top of bg image */
 .gaaga-service-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(10, 12, 20, 0.82);
-  z-index: 1;
-  transition: opacity 0.4s ease;
+  background: linear-gradient(180deg, rgba(8, 10, 17, 0.2) 0%, rgba(8, 10, 17, 0.9) 85%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
 }
-.gaaga-service-col--hover .gaaga-service-overlay { opacity: 0.65; }
 
-/* Content */
+.gaaga-service-col--hover .gaaga-service-overlay {
+  opacity: 1;
+}
+
 .gaaga-service-content {
-  position: relative;
+  position: absolute;
+  inset: auto 22px 22px;
   z-index: 2;
-  padding: 44px 36px 220px;
-  flex: 1;
-}
-.gaaga-service-title {
-  color: #fff;
-  font-size: clamp(24px, 2.2vw, 30px);
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 20px;
-  font-family: var(--font-prompt), sans-serif;
-}
-.gaaga-service-desc {
-  color: #9ca2ba;
-  font-size: 15px;
-  line-height: 1.85;
-  margin: 0 0 32px;
 }
 
-/* Small thumbnail in bottom-left on hover */
+.gaaga-service-title {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.gaaga-service-desc {
+  margin: 0;
+  color: #b5b5b5;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
 .gaaga-service-thumbnail {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 200px;
-  height: 220px;
+  left: 18px;
+  bottom: 18px;
+  width: 74px;
+  height: 74px;
   object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.35);
   z-index: 3;
-  animation: gaaga-thumb-in 0.35s ease;
-}
-@keyframes gaaga-thumb-in {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 900px) {
-  .gaaga-services-grid { grid-template-columns: repeat(2, 1fr); }
-  .gaaga-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-}
-@media (max-width: 600px) {
-  .gaaga-services-grid { grid-template-columns: 1fr; }
-  .gaaga-stats-grid { grid-template-columns: 1fr; }
-}
-
-/* ==========================================================================
-   FAQ — left accordion + right image (Trustpilot)
-   ========================================================================== */
-.gaaga-faq-section {
-  background: #111319;
-  padding: 100px 0;
-}
-.gaaga-faq-layout {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 60px !important;
-  align-items: start !important;
-}
-.gaaga-faq-eyebrow {
-  display: flex;
+.gaaga-know-more {
+  margin-top: 16px;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: #8f95ad;
-  font-size: 15px;
-  font-weight: 500;
-  margin: 0 0 0;
-  letter-spacing: 0.5px;
+  gap: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
 }
-.gaaga-faq-items { margin-top: 20px; border: 1px solid rgba(255,255,255,0.08); }
+
+.gaaga-know-more-line {
+  width: 44px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.gaaga-know-more-dot {
+  color: #dd4242;
+  font-size: 24px;
+  line-height: 0;
+}
+
+.gaaga-faq-section {
+  padding: 110px 0;
+  background: #111319;
+}
+
+.gaaga-faq-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 70px;
+  align-items: start;
+}
+
+.gaaga-faq-eyebrow {
+  margin: 0 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #959db5;
+}
+
+.gaaga-eyebrow-line {
+  width: 45px;
+  height: 1px;
+  background: rgba(149, 157, 181, 0.45);
+}
+
+.gaaga-eyebrow-dot {
+  color: #dd4242;
+}
+
 .gaaga-faq-item {
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid #222a44;
 }
-.gaaga-faq-item:last-child { border-bottom: none; }
+
+.gaaga-faq-item:last-child {
+  border-bottom: 1px solid #222a44;
+}
+
 .gaaga-faq-trigger {
   width: 100%;
-  background: none;
-  border: none;
-  padding: 22px 24px;
+  border: 0;
+  background: transparent;
   display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  cursor: pointer;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 0;
   text-align: left;
+  color: #fff;
 }
-.gaaga-faq-arrow-wrap { flex-shrink: 0; padding-top: 2px; }
+
 .gaaga-faq-play {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s ease;
+  width: 24px;
+  height: 24px;
 }
-.gaaga-faq-play--open {
-  transform: rotate(90deg);
-}
-.gaaga-faq-question {
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.45;
-  flex: 1;
-  transition: color 0.2s;
-}
-.gaaga-faq-item--open .gaaga-faq-question { color: #dd4242; }
-.gaaga-faq-body { }
-.gaaga-faq-answer {
-  color: #8f95ad;
-  font-size: 14px;
-  line-height: 1.85;
-  padding: 0 24px 24px 60px;
-  margin: 0;
-}
-.gaaga-faq-divider { display: none; }
 
-/* Right: image + Trustpilot */
-.gaaga-faq-right { position: relative; }
+.gaaga-faq-question {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.gaaga-faq-answer {
+  margin: 0 0 20px 36px;
+  color: #a8afc4;
+  line-height: 1.72;
+}
+
+.gaaga-faq-right {
+  position: relative;
+}
+
 .gaaga-faq-img {
   width: 100%;
-  height: 480px;
-  object-fit: cover;
   display: block;
+  object-fit: cover;
 }
+
 .gaaga-faq-trustpilot {
   position: absolute;
-  bottom: 24px;
-  left: 24px;
-  background: rgba(17,19,25,0.92);
-  padding: 16px 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
+  left: 22px;
+  bottom: 22px;
 }
+
 .gaaga-faq-trustpilot-inner {
-  display: flex;
-  flex-direction: column;
+  background: rgba(10, 13, 22, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 14px 16px;
+  color: #fff;
+  display: grid;
+  gap: 8px;
+}
+
+.gaaga-faq-trustpilot-dot {
+  color: #dd4242;
+}
+
+.gaaga-faq-trustpilot-brand {
+  font-weight: 700;
+}
+
+.gaaga-faq-trustpilot-stars {
+  display: inline-flex;
   gap: 6px;
 }
-.gaaga-faq-trustpilot-dot { color: #dd4242; font-size: 20px; }
-.gaaga-faq-trustpilot-brand { color: #fff; font-size: 16px; font-weight: 700; }
-.gaaga-faq-trustpilot-stars { display: flex; gap: 3px; }
-.gaaga-faq-trustpilot-count { color: #8f95ad; font-size: 12px; }
 
-@media (max-width: 900px) {
-  .gaaga-faq-layout { grid-template-columns: 1fr; }
+.gaaga-faq-trustpilot-count {
+  color: #b8bfd2;
+  font-size: 13px;
 }
 
-/* ==========================================================================
-   TESTIMONIALS — 2-column cards + big image below
-   ========================================================================== */
 .gaaga-testimonials-section {
   background: #111319;
-  padding: 0;
+  padding: 110px 0 0;
 }
-.gaaga-testimonials-heading { padding: 100px 0 60px; }
+
+.gaaga-testimonials-heading {
+  margin-bottom: 36px;
+}
+
 .gaaga-testimonials-grid {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
-  gap: 28px !important;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
 }
+
 .gaaga-testimonial-card {
-  background: #0f1118;
-  border: 1px solid rgba(255,255,255,0.06);
-  padding: 40px;
-  transition: border-color 0.3s ease;
+  background: #151b2e;
+  border: 1px solid #1e2540;
+  padding: 30px;
 }
-.gaaga-testimonial-card:hover { border-color: rgba(221,66,66,0.25); }
-.gaaga-testimonial-quote-icon { color: #dd4242; margin-bottom: 16px; }
-.gaaga-testimonial-stars { display: flex; gap: 3px; margin-bottom: 20px; }
+
+.gaaga-testimonial-quote-icon {
+  color: #dd4242;
+  margin-bottom: 16px;
+}
+
+.gaaga-testimonial-stars {
+  display: inline-flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
 .gaaga-testimonial-text {
-  color: #b5b9cc;
-  font-size: 15px;
-  line-height: 1.85;
-  margin: 0 0 32px;
+  margin: 0 0 18px;
+  color: #c3c8d8;
+  line-height: 1.7;
 }
+
 .gaaga-testimonial-author {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
-.gaaga-testimonial-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(221,66,66,0.3);
-  flex-shrink: 0;
-}
-.gaaga-testimonial-name {
-  color: #fff;
-  font-size: 15px;
-  margin: 0;
-}
-.gaaga-testimonial-name-accent { color: #dd4242; font-weight: 700; }
 
-/* Big image below testimonials */
-.gaaga-testimonials-big-image {
-  position: relative;
-  margin-top: 60px;
-}
-.gaaga-testimonials-big-img {
-  width: 100%;
-  height: 500px;
+.gaaga-testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
   object-fit: cover;
-  display: block;
-  filter: brightness(0.6) saturate(0.8);
 }
-.gaaga-testimonials-join-card {
-  position: absolute;
-  bottom: 30px;
-  left: 60px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+
+.gaaga-testimonial-name {
+  margin: 0;
+  color: #c7cddf;
+}
+
+.gaaga-testimonial-name-accent {
   color: #fff;
-  font-size: 17px;
   font-weight: 600;
 }
-.gaaga-testimonials-join-card .gaaga-know-more-line { background: rgba(255,255,255,0.5); }
-.gaaga-testimonials-join-card .gaaga-know-more-dot { font-size: 16px; }
 
-@media (max-width: 768px) {
-  .gaaga-testimonials-grid { grid-template-columns: 1fr; }
-  .gaaga-testimonials-big-img { height: 280px; }
+.gaaga-testimonials-big-image {
+  position: relative;
+  margin-top: 44px;
 }
 
-/* ==========================================================================
-   BLOG — 2-column card layout (image-left, text-right) — GaaGa style
-   ========================================================================== */
+.gaaga-testimonials-big-img {
+  width: 100%;
+  display: block;
+  max-height: 480px;
+  object-fit: cover;
+}
+
+.gaaga-testimonials-join-card {
+  position: absolute;
+  left: 28px;
+  bottom: 28px;
+  background: rgba(10, 13, 22, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 14px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .gaaga-blog-section {
   background: #111319;
-  padding: 100px 0;
+  padding: 110px 0;
 }
-.gaaga-blog-heading { margin-bottom: 60px; }
+
+.gaaga-blog-heading {
+  margin-bottom: 34px;
+}
+
 .gaaga-blog-grid {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
-  gap: 28px !important;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
+
 .gaaga-blog-card {
-  display: grid !important;
-  grid-template-columns: 160px 1fr !important;
-  gap: 0 !important;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: #0f1118;
+  background: #151b2e;
+  border: 1px solid #1e2540;
   overflow: hidden;
-  transition: border-color 0.3s ease;
 }
-.gaaga-blog-card:hover { border-color: rgba(221,66,66,0.25); }
-.gaaga-blog-card-image { overflow: hidden; }
+
 .gaaga-blog-img {
   width: 100%;
-  height: 100%;
-  min-height: 200px;
+  height: 220px;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
 }
-.gaaga-blog-card:hover .gaaga-blog-img { transform: scale(1.06); }
+
 .gaaga-blog-card-body {
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 24px;
 }
+
 .gaaga-blog-date {
-  color: #dd4242;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
   margin: 0 0 10px;
+  color: #8f95ad;
+  font-size: 13px;
+  letter-spacing: 0.05em;
 }
+
 .gaaga-blog-title {
   margin: 0 0 12px;
-  font-size: clamp(18px, 1.8vw, 24px);
-  font-weight: 700;
-  line-height: 1.25;
-  font-family: var(--font-prompt), sans-serif;
+  font-size: 26px;
+  line-height: 1.2;
 }
-.gaaga-blog-title a { color: #fff; text-decoration: none; transition: color 0.2s; }
-.gaaga-blog-title a:hover { color: #dd4242; }
-.gaaga-blog-excerpt { color: #8f95ad; font-size: 14px; line-height: 1.7; margin: 0 0 20px; flex: 1; }
+
+.gaaga-blog-title a {
+  color: #fff;
+}
+
+.gaaga-blog-excerpt {
+  margin: 0 0 16px;
+  color: #9ca2ba;
+  line-height: 1.65;
+}
+
 .gaaga-blog-readmore {
+  color: #fff;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #fff;
-  font-size: 14px;
   font-weight: 600;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.gaaga-blog-readmore:hover { color: #dd4242; }
-
-@media (max-width: 768px) {
-  .gaaga-blog-grid { grid-template-columns: 1fr; }
-  .gaaga-blog-card { grid-template-columns: 1fr; }
-  .gaaga-blog-img { min-height: 180px; }
 }
 
-/* ==========================================================================
-   SCROLL-TO-TOP button (real GaaGa has red circular button)
-   ========================================================================== */
-.gaaga-scroll-top {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #dd4242;
+.gaaga-blog-readmore:hover {
+  color: #dd4242;
+}
+
+.gaaga-footer {
+  border-top: 1px solid #1f2d4f;
+  background: #111319;
+}
+
+.gaaga-footer-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gaaga-footer-gallery-item {
+  position: relative;
+  min-height: 220px;
+}
+
+.gaaga-footer-gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gaaga-footer-insta-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 8px;
+  background: rgba(10, 13, 22, 0.6);
   color: #fff;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-  box-shadow: 0 4px 20px rgba(221,66,66,0.4);
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-.gaaga-scroll-top:hover { background: #c43333; transform: translateY(-3px); }
-
-/* ==========================================================================
-   HERO ANIMATIONS — zoom in/out on background image
-   ========================================================================== */
-@keyframes gms-hero-zoom {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.08); }
-  100% { transform: scale(1); }
-}
-.gms-hero-media .hero-image {
-  animation: gms-hero-zoom 12s ease-in-out infinite;
-  transform-origin: center center;
 }
 
-/* Fix hero eyebrow size */
-.gms-hero-eyebrow {
-  font-size: 15px !important;
+.gaaga-footer-insta-text {
+  margin: 0;
 }
 
-/* Adjust section spacing for new sections */
-.gaaga-services-section + section { margin-top: 0; }
+.gaaga-footer-insta-handle {
+  margin: 0;
+  color: #dd4242;
+}
+
+.gaaga-footer-columns {
+  max-width: 1230px;
+  margin: 0 auto;
+  padding: 56px 20px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 40px;
+}
+
+.gaaga-footer-col-title {
+  margin: 0 0 16px;
+  color: #fff;
+  font-size: 24px;
+}
+
+.gaaga-footer-tagline,
+.gaaga-footer-contact,
+.gaaga-footer-links a,
+.gaaga-footer-contact a {
+  color: #9fa7bc;
+  line-height: 1.7;
+}
+
+.gaaga-footer-contact p {
+  margin: 0 0 12px;
+}
+
+.gaaga-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.gaaga-footer-copyright {
+  border-top: 1px solid #1f2d4f;
+  text-align: center;
+  padding: 18px 20px;
+  color: #8790a8;
+}
+
+@media (max-width: 767px) {
+  .gaaga-header-inner {
+    padding: 0 20px;
+  }
+
+  .gaaga-nav,
+  .gaaga-header-cta {
+    display: none;
+  }
+
+  .gaaga-mobile-trigger {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 1024px) {
+  .gaaga-stats-grid,
+  .gaaga-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gaaga-faq-layout,
+  .gaaga-testimonials-grid,
+  .gaaga-blog-grid,
+  .gaaga-footer-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .gaaga-footer-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .gaaga-services-section,
+  .gaaga-faq-section,
+  .gaaga-testimonials-section,
+  .gaaga-blog-section {
+    padding-top: 90px;
+  }
+
+  .gaaga-promo-title {
+    font-size: clamp(28px, 8.2vw, 40px);
+    line-height: 1.16;
+  }
+
+  .gaaga-promo-img {
+    width: clamp(68px, 18vw, 92px);
+    margin: 0 6px;
+  }
+
+  .gaaga-promo-img.is-circle {
+    width: clamp(86px, 22vw, 108px);
+    margin-inline: 8px;
+  }
+
+  .gaaga-promo-video-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .gaaga-stat-item {
+    gap: 14px;
+    justify-content: flex-start;
+  }
+
+  .gaaga-stat-number {
+    font-size: clamp(62px, 17vw, 84px);
+  }
+
+  .gaaga-stat-label {
+    font-size: clamp(15px, 4.8vw, 22px);
+  }
+
+  .gaaga-stats-grid,
+  .gaaga-services-grid,
+  .gaaga-footer-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .gaaga-service-col {
+    min-height: 420px;
+    border-right: 0;
+    border-bottom: 1px solid #2a3047;
+  }
+
+  .gaaga-service-col:last-child {
+    border-bottom: 0;
+  }
+}
 
