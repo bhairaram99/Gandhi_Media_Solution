@@ -1,8 +1,13 @@
 "use client";
 
 import Container from "@/components/ui/Container";
+import type { ServiceItem } from "@/types";
 
-const SERVICES = [
+type ServiceCard = ServiceItem & {
+  href?: string;
+};
+
+const DEFAULT_SERVICES: ServiceCard[] = [
   {
     title: "SEO Optimization",
     description:
@@ -43,7 +48,18 @@ function KnowMoreLink({ href }: { href: string }) {
   );
 }
 
-export default function Services() {
+interface ServicesProps {
+  services?: ServiceItem[];
+  heading?: string;
+}
+
+export default function Services({ services, heading }: ServicesProps = {}) {
+  void heading;
+
+  const serviceItems: ServiceCard[] = services?.length
+    ? services.map((item) => ({ ...item, href: "#" }))
+    : DEFAULT_SERVICES;
+
   return (
     <section className="gaaga-services-section" id="services">
       {/* Promotion Title Section */}
@@ -126,7 +142,7 @@ export default function Services() {
 
         {/* 4-column services with hover image reveal */}
         <div className="gaaga-services-grid">
-          {SERVICES.map((service) => (
+          {serviceItems.map((service) => (
             <div
               key={service.title}
               className="gaaga-service-col"
@@ -142,7 +158,7 @@ export default function Services() {
               <div className="gaaga-service-content">
                 <h3 className="gaaga-service-title">{service.title}</h3>
                 <p className="gaaga-service-desc">{service.description}</p>
-                <KnowMoreLink href={service.href} />
+                <KnowMoreLink href={service.href ?? "#"} />
               </div>
             </div>
           ))}

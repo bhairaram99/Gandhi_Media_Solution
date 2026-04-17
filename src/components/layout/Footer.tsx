@@ -4,17 +4,17 @@ import Link from "next/link";
 const FOOTER_SERVICES = [
   "Branding & Identity",
   "Web Design & Development",
-  "Digital Marketing",
   "Mobile App Development",
-  "SEO Optimization",
-  "Creative Strategy",
+  "UI & UX Designing",
+  "Digital Marketing",
 ];
 
 const INSTAGRAM_IMAGES = [
-  { src: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop", alt: "Fashion model" },
-  { src: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=300&h=300&fit=crop", alt: "Laptop code" },
-  { src: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=300&fit=crop", alt: "Team meeting" },
-  { src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop", alt: "Portrait man" },
+  { src: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-2.png", alt: "Gaaga Insta Img 2" },
+  { src: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/home-one-instagram-1.jpg", alt: "Home one instagram" },
+  { src: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-4.png", alt: "Gaaga Insta Img 4" },
+  { src: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-5.png", alt: "Gaaga Insta Img 5" },
+  { src: "https://gaaga.wpenginepowered.com/wp-content/uploads/2023/05/Gaaga-Insta-Img-1.png", alt: "Gaaga Insta Img 1" },
 ];
 
 function GaaGaLogo() {
@@ -30,37 +30,48 @@ function GaaGaLogo() {
 }
 
 export default function Footer() {
+  const marqueeImages = [...INSTAGRAM_IMAGES, ...INSTAGRAM_IMAGES];
+
   return (
     <footer className="gaaga-footer">
-      {/* Instagram / Gallery grid - full width */}
-      <div className="gaaga-footer-gallery">
-        {INSTAGRAM_IMAGES.map((img, i) => (
-          <div key={i} className="gaaga-footer-gallery-item">
-            <img src={img.src} alt={img.alt} className="gaaga-footer-gallery-img" loading="lazy" />
-            {i === 1 && (
-              <div className="gaaga-footer-insta-overlay">
-                <div className="gaaga-footer-insta-icon" aria-hidden>
-                  <svg viewBox="0 0 24 24" fill="none" width="40" height="40">
-                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="white" strokeWidth="1.5"/>
-                    <circle cx="12" cy="12" r="5" stroke="white" strokeWidth="1.5"/>
-                    <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
-                  </svg>
-                </div>
-                <p className="gaaga-footer-insta-text">Follow Us On Instagram</p>
-                <p className="gaaga-footer-insta-handle">@Gaaga</p>
-              </div>
-            )}
+      <div className="gaaga-footer-instagram-strip" aria-label="Instagram gallery">
+        <div className="gaaga-footer-instagram-intro">
+          <p className="gaaga-footer-instagram-subtitle">Follow us on Instagram</p>
+          <p className="gaaga-footer-instagram-handle">@gaaga</p>
+        </div>
+
+        <div className="gaaga-footer-instagram-marquee">
+          <div className="gaaga-footer-instagram-track">
+            {marqueeImages.map((img, i) => (
+              <a
+                key={`${img.src}-${i}`}
+                className="gaaga-footer-instagram-item"
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="View our Instagram"
+              >
+                <img src={img.src} alt={img.alt} className="gaaga-footer-instagram-image" loading="lazy" />
+
+                <span className="gaaga-footer-instagram-overlay" aria-hidden>
+                  <span className="gaaga-footer-instagram-icon">
+                    <i className="wdticon-instagram" />
+                  </span>
+                  <span className="gaaga-footer-instagram-overlay-subtitle">Follow us on Instagram</span>
+                  <span className="gaaga-footer-instagram-overlay-title">@gaaga</span>
+                </span>
+              </a>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
 
-      {/* Footer columns */}
       <div className="gaaga-footer-columns">
-        {/* Col 1: Logo + description */}
         <div className="gaaga-footer-col gaaga-footer-col--brand">
           <Link href="/" aria-label="GaaGa home">
             <GaaGaLogo />
           </Link>
+
           <p className="gaaga-footer-tagline">
             Sodales ut etiam sit amet. Eget nulla facilisi etiam dignissim. Aliquam
             vestibulum morbi blandit cursus risus. Ultrices vitae auctor eu augue ut
@@ -68,36 +79,43 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Col 2: Contact Us */}
         <div className="gaaga-footer-col">
           <h4 className="gaaga-footer-col-title">Contact Us</h4>
+
           <address className="gaaga-footer-contact">
-            <p>No: 58 A, East Madison Street,<br />Baltimore, MD, USA 4508</p>
+            <p>No: 58 A, East Madison Street, Baltimore, MD, USA 4508</p>
             <p>
-              <a href="mailto:info@gaaga.com">info@gaaga.com</a>
+              Phone : <a href="tel:+000123456789">+000 - 123 - 456789</a>
             </p>
             <p>
-              <a href="tel:+14108229999">+1 (410) 822 9999</a>
+              Mail : <a href="mailto:info@example.com">info@example.com</a>
             </p>
+            <p>Working Hours : 8hrs</p>
           </address>
         </div>
 
-        {/* Col 3: Services */}
         <div className="gaaga-footer-col">
           <h4 className="gaaga-footer-col-title">Services</h4>
+
           <ul className="gaaga-footer-links">
-            {FOOTER_SERVICES.map((s) => (
-              <li key={s}>
-                <Link href="/services">{s}</Link>
+            {FOOTER_SERVICES.map((service) => (
+              <li key={service}>
+                <Link href="/services">
+                  <span className="gaaga-footer-link-dot" aria-hidden>
+                    •
+                  </span>
+                  <span>{service}</span>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
       </div>
 
-      {/* Copyright bar */}
       <div className="gaaga-footer-copyright">
-        <p>© {new Date().getFullYear()} GaaGa. All rights reserved.</p>
+        <p>
+          Copyright <a href="http://we-design-tech.com/">©WedesignTech</a> All Rights Reserved.
+        </p>
       </div>
     </footer>
   );

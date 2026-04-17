@@ -22,8 +22,8 @@ export default function Home() {
       <LogosMarquee />
       <Faq />
       <Testimonials testimonials={home.testimonials} />
-      <BlogPreview posts={posts.slice(0, 3)} />
       <ContactCTA cta={home.cta} />
+      <BlogPreview posts={posts.slice(0, 2)} />
     </>
   );
 }

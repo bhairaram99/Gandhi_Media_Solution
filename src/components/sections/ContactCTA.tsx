@@ -6,20 +6,24 @@ interface ContactCTAProps {
 }
 
 export default function ContactCTA({ cta }: ContactCTAProps) {
-  return (
-    <section className="gms-cta-section">
-      {/* Background dark overlay with subtle gradient */}
-      <div className="gms-cta-bg" aria-hidden />
+  void cta;
 
+  return (
+    <section className="gaaga-energy-banner" aria-label="Case study call to action">
       <Container>
-        <div className="gms-cta-inner">
-          <p className="gms-section-eyebrow" style={{ justifyContent: "center" }}>
-            Contact Us
+        <div className="gaaga-energy-banner-inner">
+          <p className="gaaga-energy-banner-ghost" aria-hidden>
+            Case Study
           </p>
-          <h2 className="gms-cta-title">{cta.title}</h2>
-          <p className="gms-cta-description">{cta.description}</p>
-          <a href="/contact" className="gms-cta-button" id="cta-start-project">
-            {cta.primaryCta}
+
+          <h2 className="gaaga-energy-banner-title">Get Fresh Energy With New Ideas</h2>
+
+          <a href="#" className="gaaga-know-more gaaga-energy-banner-join" id="cta-join-now">
+            <span className="gaaga-know-more-line" aria-hidden />
+            <span className="gaaga-know-more-dot" aria-hidden>
+              •
+            </span>
+            Join Now
           </a>
         </div>
       </Container>

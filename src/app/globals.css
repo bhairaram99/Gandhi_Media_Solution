@@ -2637,133 +2637,204 @@ textarea:focus {
 
 .gaaga-testimonials-section {
   background: #111319;
-  padding: 110px 0 0;
+  padding: 100px 0 120px;
 }
 
 .gaaga-testimonials-heading {
-  margin-bottom: 36px;
+  margin-bottom: 50px;
 }
 
 .gaaga-testimonials-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 28px;
 }
 
 .gaaga-testimonial-card {
-  background: #151b2e;
-  border: 1px solid #1e2540;
-  padding: 30px;
+  display: grid;
+  background-image: linear-gradient(180deg, rgba(61, 61, 61, 0.2) 100%, rgba(61, 61, 61, 0.2) 100%);
+  min-height: 387px;
+}
+
+.gaaga-testimonial-detail {
+  position: relative;
 }
 
 .gaaga-testimonial-quote-icon {
-  color: #dd4242;
-  margin-bottom: 16px;
-}
-
-.gaaga-testimonial-stars {
-  display: inline-flex;
-  gap: 6px;
-  margin-bottom: 16px;
+  position: absolute;
+  top: 28px;
+  left: 30px;
+  color: #b5b5b5;
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.8;
 }
 
 .gaaga-testimonial-text {
-  margin: 0 0 18px;
-  color: #c3c8d8;
-  line-height: 1.7;
+  margin: 0;
+  padding: 66px 66px 80px 82px;
+  color: #b5b5b5;
+  font-size: 16px;
+  line-height: 26.24px;
+}
+
+.gaaga-testimonial-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 30px 24px;
+  background: #111319;
 }
 
 .gaaga-testimonial-author {
   display: flex;
   align-items: center;
-  gap: 12px;
+  padding: 0 20px;
 }
 
 .gaaga-testimonial-avatar {
-  width: 48px;
-  height: 48px;
+  width: 86px;
+  height: 86px;
+  margin-right: 38px;
   border-radius: 999px;
+  background-color: #dd4242;
   object-fit: cover;
 }
 
 .gaaga-testimonial-name {
   margin: 0;
-  color: #c7cddf;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #717171;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .gaaga-testimonial-name-accent {
-  color: #fff;
-  font-weight: 600;
+  color: #dd4242;
 }
 
-.gaaga-testimonials-big-image {
-  position: relative;
-  margin-top: 44px;
+.gaaga-testimonial-name-divider {
+  color: #717171;
 }
 
-.gaaga-testimonials-big-img {
-  width: 100%;
-  display: block;
-  max-height: 480px;
-  object-fit: cover;
-}
-
-.gaaga-testimonials-join-card {
-  position: absolute;
-  left: 28px;
-  bottom: 28px;
-  background: rgba(10, 13, 22, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
-  padding: 14px 20px;
+.gaaga-testimonial-stars {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: inline-flex;
   align-items: center;
   gap: 10px;
 }
 
+.gaaga-testimonial-stars li {
+  font-size: 16px;
+  line-height: 1;
+  color: #fff;
+}
+
+.gaaga-testimonial-stars li.is-empty {
+  opacity: 0.4;
+}
+
+.gaaga-energy-banner {
+  position: relative;
+  background-image: url("https://gaaga.wpenginepowered.com/wp-content/uploads/2023/06/Gagaa-Home1-Banner-Bg-scaled.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  isolation: isolate;
+}
+
+.gaaga-energy-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(17, 19, 25, 0.15), rgba(17, 19, 25, 0.45));
+  z-index: 0;
+}
+
+.gaaga-energy-banner-inner {
+  position: relative;
+  z-index: 1;
+  padding: 240px 0 70px;
+}
+
+.gaaga-energy-banner-ghost {
+  margin: 0 0 30px;
+  color: #fff;
+  font-size: 120px;
+  line-height: 176px;
+  letter-spacing: 20.24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.1;
+}
+
+.gaaga-energy-banner-title {
+  margin: 0 0 25px;
+  max-width: 760px;
+  color: #fff;
+  font-family: var(--font-prompt), sans-serif;
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.gaaga-energy-banner-join {
+  color: #fff;
+}
+
 .gaaga-blog-section {
   background: #111319;
-  padding: 110px 0;
+  padding: 100px 0 130px;
 }
 
 .gaaga-blog-heading {
-  margin-bottom: 34px;
+  margin-bottom: 48px;
 }
 
 .gaaga-blog-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
 }
 
 .gaaga-blog-card {
-  background: #151b2e;
-  border: 1px solid #1e2540;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(230px, 45%) 1fr;
+  border: 1px solid #dd4242;
+  min-height: 360px;
 }
 
-.gaaga-blog-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
+.gaaga-blog-card-image {
+  min-height: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .gaaga-blog-card-body {
-  padding: 24px;
+  padding: 30px 35px 40px;
 }
 
 .gaaga-blog-date {
   margin: 0 0 10px;
-  color: #8f95ad;
-  font-size: 13px;
-  letter-spacing: 0.05em;
+  color: #dd4242;
+  font-size: 12px;
+  line-height: 19.68px;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
 }
 
 .gaaga-blog-title {
-  margin: 0 0 12px;
-  font-size: 26px;
-  line-height: 1.2;
+  margin: 0 0 20px;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.16;
 }
 
 .gaaga-blog-title a {
@@ -2771,17 +2842,19 @@ textarea:focus {
 }
 
 .gaaga-blog-excerpt {
-  margin: 0 0 16px;
-  color: #9ca2ba;
-  line-height: 1.65;
+  margin: 0 0 28px;
+  color: #b5b5b5;
+  font-size: 16px;
+  line-height: 26.24px;
 }
 
 .gaaga-blog-readmore {
   color: #fff;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 600;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .gaaga-blog-readmore:hover {
@@ -2789,45 +2862,115 @@ textarea:focus {
 }
 
 .gaaga-footer {
-  border-top: 1px solid #1f2d4f;
   background: #111319;
 }
 
-.gaaga-footer-gallery {
+.gaaga-footer-instagram-strip {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.gaaga-footer-gallery-item {
-  position: relative;
-  min-height: 220px;
-}
-
-.gaaga-footer-gallery-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.gaaga-footer-insta-overlay {
-  position: absolute;
-  inset: 0;
+.gaaga-footer-instagram-intro {
+  min-height: 301px;
+  padding: 24px;
   display: grid;
   place-content: center;
   text-align: center;
-  gap: 8px;
-  background: rgba(10, 13, 22, 0.6);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gaaga-footer-instagram-subtitle {
+  margin: 0 0 10px;
+  color: #b5b5b5;
+  font-size: 16px;
+  line-height: 1.64;
+}
+
+.gaaga-footer-instagram-handle {
+  margin: 0;
+  color: #fff;
+  font-size: 30px;
+  line-height: 1.16;
+  font-weight: 600;
+}
+
+.gaaga-footer-instagram-marquee {
+  position: relative;
+  overflow: hidden;
+}
+
+.gaaga-footer-instagram-track {
+  display: flex;
+  width: max-content;
+  animation: gaaga-instagram-marquee 36s linear infinite;
+}
+
+.gaaga-footer-instagram-marquee:hover .gaaga-footer-instagram-track {
+  animation-play-state: paused;
+}
+
+.gaaga-footer-instagram-item {
+  position: relative;
+  width: 301px;
+  height: 301px;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.gaaga-footer-instagram-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.gaaga-footer-instagram-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(21, 23, 28, 0.9);
+  border: 1px solid #dd4242;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.8s ease;
   color: #fff;
 }
 
-.gaaga-footer-insta-text {
-  margin: 0;
+.gaaga-footer-instagram-item:hover .gaaga-footer-instagram-overlay {
+  transform: scale(1);
+  opacity: 1;
 }
 
-.gaaga-footer-insta-handle {
-  margin: 0;
-  color: #dd4242;
+.gaaga-footer-instagram-icon {
+  width: 90px;
+  height: 90px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+
+.gaaga-footer-instagram-overlay-subtitle {
+  font-size: 16px;
+  line-height: 1.64;
+}
+
+.gaaga-footer-instagram-overlay-title {
+  font-size: 30px;
+  line-height: 1.16;
+  font-weight: 600;
 }
 
 .gaaga-footer-columns {
@@ -2843,6 +2986,7 @@ textarea:focus {
   margin: 0 0 16px;
   color: #fff;
   font-size: 24px;
+  font-weight: 600;
 }
 
 .gaaga-footer-tagline,
@@ -2850,7 +2994,13 @@ textarea:focus {
 .gaaga-footer-links a,
 .gaaga-footer-contact a {
   color: #9fa7bc;
+  font-size: 16px;
   line-height: 1.7;
+}
+
+.gaaga-footer-contact {
+  margin: 0;
+  font-style: normal;
 }
 
 .gaaga-footer-contact p {
@@ -2865,11 +3015,41 @@ textarea:focus {
   gap: 8px;
 }
 
+.gaaga-footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gaaga-footer-link-dot {
+  color: #dd4242;
+  font-size: 14px;
+  line-height: 0;
+}
+
 .gaaga-footer-copyright {
-  border-top: 1px solid #1f2d4f;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   text-align: center;
-  padding: 18px 20px;
+  padding: 15px 20px;
   color: #8790a8;
+}
+
+.gaaga-footer-copyright p {
+  margin: 0;
+}
+
+.gaaga-footer-copyright a {
+  color: inherit;
+}
+
+@keyframes gaaga-instagram-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 767px) {
@@ -2917,6 +3097,34 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
+  .gaaga-energy-banner-inner {
+    padding: 200px 0 60px;
+  }
+
+  .gaaga-energy-banner-ghost {
+    font-size: 80px;
+    line-height: 130px;
+    letter-spacing: 12px;
+  }
+
+  .gaaga-energy-banner-title {
+    font-size: 44px;
+  }
+
+  .gaaga-blog-card {
+    grid-template-columns: minmax(220px, 45%) 1fr;
+  }
+
+  .gaaga-footer-instagram-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .gaaga-footer-instagram-intro {
+    min-height: 180px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
   .gaaga-faq-left {
     padding: 70px 36px 60px;
     border-right: 1px solid rgba(221, 66, 66, 0.65);
@@ -2928,10 +3136,6 @@ textarea:focus {
 
   .gaaga-faq-img {
     min-height: 540px;
-  }
-
-  .gaaga-footer-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -2997,8 +3201,7 @@ textarea:focus {
   }
 
   .gaaga-stats-grid,
-  .gaaga-services-grid,
-  .gaaga-footer-gallery {
+  .gaaga-services-grid {
     grid-template-columns: 1fr;
   }
 
@@ -3040,6 +3243,94 @@ textarea:focus {
 
   .gaaga-faq-img {
     min-height: 420px;
+  }
+
+  .gaaga-testimonials-section,
+  .gaaga-blog-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .gaaga-testimonials-heading,
+  .gaaga-blog-heading {
+    margin-bottom: 30px;
+  }
+
+  .gaaga-testimonial-text {
+    padding: 52px 32px 55px 50px;
+  }
+
+  .gaaga-testimonial-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 0 20px 20px;
+  }
+
+  .gaaga-testimonial-author {
+    padding: 0;
+  }
+
+  .gaaga-testimonial-avatar {
+    width: 72px;
+    height: 72px;
+    margin-right: 20px;
+  }
+
+  .gaaga-energy-banner-inner {
+    padding: 150px 0 50px;
+  }
+
+  .gaaga-energy-banner-ghost {
+    font-size: 44px;
+    line-height: 70px;
+    letter-spacing: 8px;
+  }
+
+  .gaaga-energy-banner-title {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  .gaaga-blog-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .gaaga-blog-card-image {
+    min-height: 260px;
+  }
+
+  .gaaga-blog-card-body {
+    padding: 24px 20px 28px;
+  }
+
+  .gaaga-blog-title {
+    font-size: 30px;
+  }
+
+  .gaaga-footer-instagram-intro {
+    min-height: 150px;
+  }
+
+  .gaaga-footer-instagram-track {
+    animation-duration: 28s;
+  }
+
+  .gaaga-footer-instagram-item {
+    width: 220px;
+    height: 220px;
+  }
+
+  .gaaga-footer-instagram-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .gaaga-footer-instagram-overlay-title {
+    font-size: 24px;
   }
 }
 
